@@ -30,23 +30,14 @@ public class GameManager : MonoBehaviour
         {
             archerEnemy.EnemyClone($"Clone-{i}");
         }
-        */
         attackCharacter =  CreateCharacter(CharacterType.Defence);
         CloneCharacter(attackCharacter,"DefenceCharacter-1");
+        */
     }
 
-    void Start()
-    {
-        
-        
-       
-    }
-
-    void Update()
-    {
-        
-    }
-
+    //Abstract Factory kullanarak çok class oluşturulduğundan dolayı başka daha düzgün olması bu durum da kullanılan bir
+    //Design pattern bulup onu uygulayacağım.
+    
     public Enemy CreateEnemy(EnemyType enemyType)
     {
         Enemy newEnemyScript = EnemyCreator.Creator(enemyType);
