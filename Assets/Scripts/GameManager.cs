@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using AdapterDesignPattern;
 using Characters;
+using DecoratorDesignPattern;
 using Enemys;
+using ObjectPoolingDesignPattern;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -22,18 +25,42 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Enemy archerEnemy;
     [SerializeField] private Character attackCharacter;
 
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private int bulletSize;
+    [SerializeField] private GameObject startBullet;
     void Awake()
     {
         /*
-        archerEnemy = CreateEnemy(EnemyType.Mage);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < bulletSize; i++)
         {
-            archerEnemy.EnemyClone($"Clone-{i}");
+            GameObject newBulletGameObject = Instantiate(bullet);
+            newBulletGameObject.SetActive(false);
+            BalletObjectPool.AddBullet(newBulletGameObject);
         }
-        attackCharacter =  CreateCharacter(CharacterType.Defence);
-        CloneCharacter(attackCharacter,"DefenceCharacter-1");
         */
+        _Character _Character = new _DefenseCharacterDecorator(new _DefenseCharacter());
+        _Character.Attack();
+
     }
+
+    void Update()
+    {
+        /*
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+           startBullet = BalletObjectPool.GetBullet();
+        }
+
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            BalletObjectPool.ReturnBullet(startBullet);
+        }
+        */
+
+    }
+
+
+    #region  Abstract Factory ve Builder Design Pattern
 
     //Abstract Factory kullanarak çok class oluşturulduğundan dolayı başka daha düzgün olması bu durum da kullanılan bir
     //Design pattern bulup onu uygulayacağım.
@@ -61,4 +88,22 @@ public class GameManager : MonoBehaviour
         Character cloneCharacterScript = cloneCharacter.GetComponent<Character>();
         cloneCharacterScript = character.Clone(); 
     }
+
+    #endregion
+
+    #region  Adapter Design Patter
+
+    private void AdapterDesignPatter()
+    {
+        GamepadController gamepadController = new GamepadController();
+        IPlayerController playerController = new GamepadAdapter(gamepadController);
+
+        InputControllerAdapter inputControllerAdapter = new InputControllerAdapter(playerController);
+    
+        inputControllerAdapter.InputMove();
+    }
+
+    #endregion
+
+    
 }

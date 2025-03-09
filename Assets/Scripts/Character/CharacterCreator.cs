@@ -11,7 +11,6 @@ namespace Characters
             CharacterFactoryBuilder characterFactoryBuilder = characterType switch
             {
                 CharacterType.Attack => new AttackCharacter(),
-                CharacterType.Defence => new DefenceCharacter(),
                 _ => default
             };
 
