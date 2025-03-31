@@ -3,41 +3,76 @@ using UnityEngine;
 
 using Enemy;
 using System;
+using System.Collections.Generic;
 
 namespace EnemyFactorys
 {
     [Serializable]
-    public class EnemyFactory  
+    public class EnemyFactory
     {
-        public BaseEnemy Create(EnemyNameEnum enemyName)
-        {
-            GameObject enemyPrefab = Resources.Load<GameObject>($"EnemyPrefabs/{enemyName}");
-            GameObject enemy = GameObject.Instantiate(enemyPrefab);
-            enemy.name = enemy.name.Replace("(Clone)", "");
+        private  Dictionary<string, BaseEnemy> enemyPool = new Dictionary<string, BaseEnemy>();
 
-            BaseEnemy Enemy = EnemyScriptTypeFind(enemy);
-            return Enemy;
-        }   
-
-        private BaseEnemy EnemyScriptTypeFind(GameObject enemy)
+        public BaseEnemy Create(EnemyNameEnum enemyName, Vector3 position)
         {
-            BaseEnemy baseEnemy = enemy.GetComponent<BaseEnemy>();
-            switch(baseEnemy)
+            if(enemyPool.TryGetValue(enemyName.ToString(), out BaseEnemy enemy))
             {
-                case BossEnemy:
-                    return (BossEnemy)baseEnemy;
-                case MageEnemy:
-                    return (MageEnemy)baseEnemy;
-                case MeleeEnemy:
-                    return (MeleeEnemy)baseEnemy;
-                case RangeEnemy:
-                    return (RangeEnemy)baseEnemy;
-                case TankEnemy:
-                    return (TankEnemy)baseEnemy;
-                default:
-                    return null;
+                BaseEnemy baseEnemy =  enemy.EnemyClone();
+                
+                 baseEnemy.SetEnemyPosition(position);
+                baseEnemy.SetEnemyName(baseEnemy.name);
+                return  baseEnemy;
+            }
+
+            GameObject prefab = Resources.Load<GameObject>($"EnemyPrefabs/{enemyName.ToString()}");
+
+            BaseEnemy _enemy = GameObject.Instantiate(prefab).GetComponent<BaseEnemy>();
+            _enemy.SetEnemyPosition(position);
+            _enemy.SetEnemyName(_enemy.name);
+
+            enemyPool.Add(enemyName.ToString(),_enemy);
+
+            return _enemy;
+
+        }
+
+
+        internal void SaveEnemyTypeFindToList(BaseEnemy enemy)
+        {
+            switch(enemy.tag)
+            {
+             
+                case "MageEnemy":
+             
+                break;
+             
+                case "MeleeEnemy":
+             
+                break;
+             
+                case "RangeEnemy":
+             
+                break;
+             
+                case "TankEnemy":
+             
+                break;
+
+                case "BossEnemy":
+                break;
+            
             }
         }
+
+       
+        int randomEnemyPositionIndex = 0;
+
+        private void AdjustingEnemyPosition(BaseEnemy enemy,Transform[] enemyPositions,int randomIndex)
+        {
+            randomEnemyPositionIndex = randomIndex;
+            enemy.SetEnemyPosition(enemyPositions[randomEnemyPositionIndex].position);
+        }   
+
+
     }
 
 }

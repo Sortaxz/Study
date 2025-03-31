@@ -1,17 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using AdapterDesignPattern;
-using Characters;
 using Enemy;
 using EnemyFactorys;
-using Rewards.Enums;
 using Towers;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    public static GameManager Instance 
+    public static GameManager Instance
     {
         get
         {
@@ -19,56 +16,74 @@ public class GameManager : MonoBehaviour
             {
                 instance = FindObjectOfType<GameManager>();
             }
-            return instance;    
+            return instance;
         }
     }
 
-   
+    EnemyFactory enemyFactory;
+
+
     void Awake()
     {
-       
+        enemyFactory = new EnemyFactory();
     }
 
-    [SerializeField] private GameObject target;
-        //Balanced,Swarm,Tank
-    [SerializeField] GameObject enemyPrefab;
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            ArcherTowerFactory archerTowerFactory = new ArcherTowerFactory();
-            ArcherTower archerTower = (ArcherTower)archerTowerFactory.Create(TowerName.ArcherTower_1);
-            archerTower.SetTowerAttackSpeed(35);
-            print(archerTower.TowerAttackSpeed);
-            
+            int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
+            BossEnemy bossEnemy1 = enemyFactory.Create(EnemyNameEnum.BossEnemy_1, GameUIManager.Instance.EnemyPositions[0].position) as BossEnemy;
+            enemyFactory.SaveEnemyTypeFindToList(bossEnemy1);
+            bossEnemy1.SetEnemyAttack(null, 500, 1000);
+            bossEnemy1.SetTargetMovement(GameUIManager.Instance.Target.position);
+
         }
 
-        if(Input.GetKeyDown(KeyCode.V))
+
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            FireTowerFactory fireTowerFactory= new FireTowerFactory();
-            fireTowerFactory.Create(TowerName.FireTower_1);
+            TowerCreator towerCreator = new TowerCreator();
+            towerCreator.Create(new FireTowerFactory(), TowerName.FireTower_2);
+
         }
 
-        if(Input.GetKeyDown(KeyCode.Z))
+        // if(Input.GetKeyDown(KeyCode.C))
+        // {
+        //     WindowManager windowManager = new WindowManager();
+        //     windowManager.MinimizeWindow();
+        // }
+
+        if (Input.GetMouseButtonDown(0))
         {
-            IceTowerFactory iceTowerFactory = new IceTowerFactory();
-            iceTowerFactory.Create(TowerName.IceTower_1);
+            /*
+            Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            TowerCreator towerCreator = new TowerCreator();
+            ArcherTower archerTower = (ArcherTower)towerCreator.Create(new ArcherTowerFactory(),TowerName.ArcherTower_1);
+            archerTower.SetTowerPosition(new Vector3(newPos.x, newPos.y,-1));
+            archerTower.SetTowerName(archerTower.name);
+            */
         }
 
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            EnemyFactory enemyFactory = new EnemyFactory();
-            BossEnemy enemy =  enemyFactory.Create(EnemyNameEnum.BossEnemy_1) as BossEnemy;
-            enemy.SetTargetMovement(new Vector3(10,0,0));
-        }
-
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            RewardController rewardController = new RewardController();
-            rewardController.EssenceRewardCreate(EssenceNameEnum.EssenceReward_1);
-            rewardController.ItemRewardCreate(ItemNameEnum.ItemReward_1);
-        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -86,7 +101,7 @@ public class GameManager : MonoBehaviour
         newEnemyScript.gameObject.name = newEnemyScript.EnemyName;
         return newEnemyScript;
     }
-    */
+    
 
     public Character CreateCharacter(CharacterType characterType)
     {
@@ -117,8 +132,9 @@ public class GameManager : MonoBehaviour
     
         inputControllerAdapter.InputMove();
     }
-
+    
+    #endregion
+*/
     #endregion
 
-    
 }

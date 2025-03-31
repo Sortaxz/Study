@@ -6,6 +6,8 @@ namespace Towers
 {
     public abstract class Tower : MonoBehaviour
     {
+        private string towerName;
+        public string TowerName => towerName;
         private TowerAttackType towerAttackType; 
         public TowerAttackType TowerAttackType { get { return towerAttackType;} set { towerAttackType = value;}}
         
@@ -23,7 +25,22 @@ namespace Towers
         
         private int towerCost;
         public int TowerCost { get { return towerCost;} set { towerCost = value;} }
-    
+
+        public virtual void SetTowerName(string name)
+        {
+            if(transform.name.Contains("(Clone)"))
+            {
+                transform.name = name.Replace("(Clone)", "");
+                return;
+            }
+            transform.name = name;
+        }
+
+        public virtual void SetTowerPosition(Vector3 newPos)
+        {
+            transform.position = newPos;
+        }
+
         public abstract void SetTowerAttackType(TowerAttackType towerAttackType);
         public abstract void SetTowerDamage(int damage);
         public abstract void SetTowerAttackSpeed(int attackSpeed);

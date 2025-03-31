@@ -4,25 +4,38 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public interface IBaseEnemy
-    {
-        void SetEnemyName(string name);
-        void SetEnemyHealt(float healt);
-        void SetEnemyShield(int shield);
-        void SetEnemySpeed(float speed);
-        void SetEnemyDamage(int damage);
-        void SetEnemyAttack(int attack);
-        void SetEnemyDefense(int defense);
-        void SetEnemyPosition(Vector3 newPos);
-        void EnemyMove(GameObject targetPosition);
 
+
+    public interface IBossEnemy
+    {
+        void SetTargetMovement(Vector3 targetPos);
+        void Movement(Vector3 targetPos);
+        
+    }
+
+    public interface IMageEnemy
+    {
+        void SetTargetMovement(Vector3 targetPos);
+        void Movement(Vector3 targetPos);
     }
 
 
-    public interface IBossMovement
+    public interface IMeleeEnemy
     {
         void SetTargetMovement(Vector3 targetPos);
-        void RigidBodyMove(Vector3 targetPos);
+        void Movement(Vector3 targetPos);
+    }
+
+    public interface IRangeEnemy
+    {
+        void SetTargetMovement(Vector3 targetPos);
+        void Movement(Vector3 targetPos);
+    }
+
+    public interface ITankEnemy
+    {
+        void SetTargetMovement(Vector3 targetPos);
+        void Movement(Vector3 targetPos);
     }
 
 }

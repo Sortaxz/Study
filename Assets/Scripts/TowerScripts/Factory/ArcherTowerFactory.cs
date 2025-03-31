@@ -13,10 +13,11 @@ namespace Towers
             GameObject tower = null;
             GameObject prefab = null;
 
-            prefab = Resources.Load<GameObject>($"Tower/{towerName.ToString()}");
+            prefab = Resources.Load<GameObject>($"Tower/ArcherTowerPrefabs/{towerName.ToString()}");
             if(prefab != null)
             {
                 tower = GameObject.Instantiate(prefab);
+                tower.name = tower.name.Replace("(Clone)","");
             }
                         
 

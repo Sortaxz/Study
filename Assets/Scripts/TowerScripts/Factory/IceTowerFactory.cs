@@ -8,11 +8,12 @@ namespace Towers
     {
         public Tower Create(TowerName towerName)
         {
-            GameObject prefab = Resources.Load<GameObject>($"Tower/{towerName}");
+            GameObject prefab = Resources.Load<GameObject>($"Tower/IceTowerPrefabs/{towerName}");
             GameObject iceTower = null;
             if(prefab != null)
             {
                 iceTower = GameObject.Instantiate(prefab);
+                iceTower.name = iceTower.name.Replace("(Clone)","");
             }
 
             return iceTower.GetComponent<Tower>();

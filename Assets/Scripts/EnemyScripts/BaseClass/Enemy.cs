@@ -1,82 +1,276 @@
+using Enemy.Bullet;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Enemy
 {
-    public abstract class BaseEnemy :MonoBehaviour,IBaseEnemy
+    public abstract class BaseEnemy :MonoBehaviour
     {
-        private GameObject targetPosition;
-        private Vector3 newPos;
+        protected GameObject target;
+        protected Vector3 newPos;
 
-        private string _enemyName;
+        [SerializeField] protected string _enemyName;
         public string EnemyName => _enemyName;
 
-        private float _enemyHealt;
+        [SerializeField] protected float _enemyHealt;
         public float EnemyHealt => _enemyHealt;
+        
+        protected float _enemyMaxHealt;
+        public float MaxEnemyMaxHealt => _enemyMaxHealt;
 
-        private int _enemyShield;
-        public int EnemyShield => _enemyShield;
-
-        private float _enemySpeed;
+        [SerializeField] protected float _enemySpeed;
         public float EnemySpeed => _enemySpeed;
 
-        private int _enemyDamage;
+        protected float _enemyMaxSpeed;
+        public float MaxEnemyMaxSpeed => _enemyMaxSpeed;
+
+
+        [SerializeField] protected int _enemyShield;
+        public int EnemyShield => _enemyShield;
+
+        protected int _enemyMaxShield;
+        public int MaxEnemyMaxShield => _enemyMaxShield;
+
+
+        [SerializeField] protected int _enemyDamage;
         public int EnemyDamage => _enemyDamage;
 
-        private int _enemyAttack;
+        protected int _enemyMaxDamage;
+        public int MaxEnemyMaxDamage => _enemyMaxDamage;
+
+
+        [SerializeField] protected int _enemyAttack;
         public int EnemyAttack {get {return _enemyAttack;} set {_enemyAttack = value;} }
 
-        private int _enemyDefense;
+        protected float _enemyMaxAttack;
+        public float MaxEnemyMaxAttack => _enemyMaxAttack;
+        
+        [SerializeField] protected int _enemyDefense;
         public int EnemyDefense => _enemyDefense;
 
+        private int _enemyMaxDefense;
+        public int EnemyMaxDefense => _enemyMaxDefense;            
 
-        public void EnemyMove(GameObject targetPosition)
+        [SerializeField] protected bool isFire;
+        public bool IsFire => isFire;
+
+        public void SetEnemyName(string name)
         {
-            this.targetPosition = targetPosition;
+            transform.name = name.Replace("(Clone)","");
+            _enemyName = transform.name;
         }
 
-        public void SetEnemyAttack(int attack)
-        {
-            _enemyAttack = attack;
-        }
-
-        public void SetEnemyDefense(int defense)
-        {
-            _enemyDefense = defense;
-        }
-
-        public void SetEnemyHealt(float healt)
+        #region  Enemy Healt
+    
+        public virtual void SetEnemyHealt(float healt,float maxHealt)
         {
             _enemyHealt = healt;
         }
 
-        public void SetEnemyPosition(Vector3 newPos)
+        public virtual void EnemyHealtIncrease(float healt)
         {
-            this.newPos = newPos;
+            if(_enemyHealt < _enemyMaxHealt)
+            {
+                _enemyHealt += healt;
+            }
+            else
+            {
+                _enemyHealt = _enemyMaxHealt;
+                return;
+            }
         }
 
-        public void SetEnemySpeed(float speed)
+        public virtual void EnemyHealtReduction(float value)
+        {
+            if(_enemyHealt > 0)
+            {
+                _enemyHealt -= value;
+            }
+            else
+            {
+                _enemyHealt = 0;
+                return;
+            }
+        }
+
+        #endregion
+
+
+
+        #region  Enemy Speed
+    
+        public virtual void SetEnemySpeed(int speed,int maxSpeed)
         {
             _enemySpeed = speed;
+            _enemyMaxSpeed = maxSpeed;
         }
 
-        public void SetEnemyName(string name)
+        public virtual void EnemySpeedIncrease(int speedValue)
         {
-            _enemyName = name;
+            if(_enemySpeed < _enemyMaxSpeed)
+            {
+                _enemySpeed += speedValue;
+            }
+            else
+            {
+                _enemySpeed = _enemyMaxShield;
+                return;
+            }
         }
 
-        public void SetEnemyShield(int shield)
+        public virtual void EnemySpeedReduction(int value)
         {
-            _enemyShield = shield;
+            if(_enemySpeed > 0)
+            {
+                _enemySpeed -= value;
+            }
+            else
+            {
+                _enemySpeed = 0;
+                return;
+            }
         }
 
-        public void SetEnemyDamage(int damage)
+        #endregion
+
+
+
+        #region  Enemy Damage
+    
+        public virtual void SetEnemyDamage(int damage,int maxDamage)
         {
             _enemyDamage = damage;
+            _enemyMaxDamage = maxDamage;
+        }
+
+        public virtual void EnemyDamageIncrease(int damageValue)
+        {
+            if(_enemyDamage < _enemyMaxDamage)
+            {
+                _enemyDamage += damageValue;
+            }
+            else
+            {
+                _enemyDamage = _enemyMaxDamage;
+                return;
+            }
+        }
+
+        public virtual void EnemyDamageReduction(int value)
+        {
+            if(_enemyDamage > 0)
+            {
+                _enemyDamage -= value;
+            }
+            else
+            {
+                _enemyDamage = 0;
+                return;
+            }
+        }
+
+        #endregion
+
+        
+
+        #region  Enemy Shield
+    
+        public virtual void SetEnemyShield(int shield,int maxShield)
+        {
+            _enemyShield = shield;
+            _enemyMaxShield = maxShield;
+        }
+
+        public virtual void EnemyShieldIncrease(int shieldValue)
+        {
+            if(_enemyShield < _enemyMaxShield)
+            {
+                _enemyShield += shieldValue;
+            }
+            else
+            {
+                _enemyShield = _enemyMaxShield;
+                return;
+            }
+        }
+
+        public virtual void EnemyShieldReduction(int value)
+        {
+            if(_enemyShield > 0)
+            {
+                _enemyShield -= value;
+            }
+            else
+            {
+                _enemyShield = 0;
+                return;
+            }
+        }
+
+        #endregion
+
+
+        #region  Enemy Attack
+    
+        public virtual void SetEnemyAttack(GameObject target,int enemyAttack,int enemyMaxAttack)
+        {
+            this.target = target;
+            _enemyAttack = enemyAttack;
+            _enemyMaxAttack = enemyMaxAttack;
+        }
+
+        public virtual void EnemyAttackFunction(int damageValue)
+        {
+            print("attak yapiyor");
         }
 
 
+        #endregion
+        
+    
+        #region  Enemy Defense
+
+        public virtual void SetEnemyDefense(int defense,int maxDefense)
+        {
+            _enemyDefense = defense;
+            _enemyMaxDefense = maxDefense;
+        }
+
+
+        public virtual void EnemyDefenseFunction()
+        {
+
+        }
+
+
+        #endregion   
+
+
+        public virtual void SetEnemyPosition(Vector3 newPos)
+        {
+            transform.position = newPos;
+        }
+
+        public virtual BaseEnemy EnemyClone()
+        {
+            BaseEnemy clonedEnemy = (BaseEnemy)MemberwiseClone();
+        
+
+            // Derin kopya: enemyBullets nesnesini yeniden oluştur ve içeriği kopyala
+            BaseEnemy a = GameObject.Instantiate(clonedEnemy);
+            SetEnemyChildGameObjectActive(a);
+            a.isFire = false; 
+            return a;
+        }
+
+        private void SetEnemyChildGameObjectActive(BaseEnemy baseEnemy)
+        {
+            for (int i = 0; i < baseEnemy.transform.GetChild(0).childCount; i++)
+            {
+                baseEnemy.transform.GetChild(0).GetChild(i).gameObject.SetActive(false);
+            }
+        }
     }
 
 }

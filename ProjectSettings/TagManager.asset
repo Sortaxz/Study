@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TowerBullet
+  - ArcherTower
+  - FireTower
+  - IceTower
+  - MainTower
+  - EnemyBullet
+  - BossEnemy
+  - MageEnemy
+  - MeleeEnemy
+  - RangeEnemy
+  - TankEnemy
   layers:
   - Default
   - TransparentFX
