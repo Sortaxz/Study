@@ -6,6 +6,11 @@ namespace Towers
 {
     public class FireTower : Tower,IFireTower
     {
+        void Awake()
+        {
+            towerHealt = 100;
+        }
+
         public override void SetTowerAttackSpeed(int attackSpeed)
         {
             TowerAttackSpeed = attackSpeed;
@@ -34,6 +39,13 @@ namespace Towers
         public override void SetTowerTargetPriority(GameObject targetPriority)
         {
             TowerTargetPriority = targetPriority;
+        }
+
+        
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            print(collision.gameObject.name);
         }
     }
 

@@ -48,22 +48,18 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             TowerCreator towerCreator = new TowerCreator();
-            towerCreator.Create(new FireTowerFactory(), TowerName.FireTower_2);
+            towerCreator.Create(new ArcherTowerFactory(), TowerName.ArcherTower_1,Vector2.zero);
 
         }
 
-        // if(Input.GetKeyDown(KeyCode.C))
-        // {
-        //     WindowManager windowManager = new WindowManager();
-        //     windowManager.MinimizeWindow();
-        // }
+       
 
         if (Input.GetMouseButtonDown(0))
         {
             /*
             Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             TowerCreator towerCreator = new TowerCreator();
-            ArcherTower archerTower = (ArcherTower)towerCreator.Create(new ArcherTowerFactory(),TowerName.ArcherTower_1);
+            ArcherTower archerTower = (ArcherTower)towerCreator.Create(new ArcherTowerFactory(),TowerName.ArcherTower_1,Vector2.zero);
             archerTower.SetTowerPosition(new Vector3(newPos.x, newPos.y,-1));
             archerTower.SetTowerName(archerTower.name);
             */

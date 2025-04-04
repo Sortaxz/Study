@@ -6,7 +6,7 @@ namespace Towers
 {
     public class FireTowerFactory : IFireTowerFactory
     {
-        public Tower Create(TowerName towerName)
+        public Tower Create(TowerName towerName,Vector3 towerPosition)
         {
             GameObject prefab = Resources.Load<GameObject>($"Tower/FireTowerPrefabs/{towerName}");
             GameObject fireTower = null;

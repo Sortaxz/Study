@@ -6,24 +6,40 @@ namespace Towers
 {
     public abstract class Tower : MonoBehaviour
     {
-        private string towerName;
-        public string TowerName => towerName;
-        private TowerAttackType towerAttackType; 
+        protected TowerAttackType towerAttackType; 
         public TowerAttackType TowerAttackType { get { return towerAttackType;} set { towerAttackType = value;}}
-        
-        private int towerDamage;
-        public int TowerDamage { get { return towerDamage;} set { towerDamage = value;} }
-        
-        private int towerAttackSpeed;
-        public int TowerAttackSpeed { get { return towerAttackSpeed;} set { towerAttackSpeed = value;}}
-        
-        private int towerRange;
-        public int TowerRange { get { return towerRange;} set { towerRange = value;}}
-        
-        private GameObject towerTargetPriority;
+        protected GameObject towerTargetPriority;
         public GameObject TowerTargetPriority { get { return towerTargetPriority;} set { towerTargetPriority = value;}}
         
-        private int towerCost;
+        [SerializeField] protected TowerBullet towerBulletPrefab;
+        public TowerBullet TowerBulletPrefab => towerBulletPrefab;
+
+        [SerializeField] protected Transform towerBulletsParent;
+        public Transform TowerBulletsParent => towerBulletsParent;
+
+        protected Queue<TowerBullet> towerBullets;
+        public Queue<TowerBullet> TowerBullets => towerBullets;
+
+        protected string towerName;
+        public string TowerName => towerName;
+
+        [SerializeField] protected float towerHealt;
+        public float TowerHealt => towerHealt;
+
+        protected float maxTowerHealt;
+        public float MaxTowerHealt => maxTowerHealt;
+
+        
+        protected int towerDamage;
+        public int TowerDamage { get { return towerDamage;} set { towerDamage = value;} }
+        
+        protected int towerAttackSpeed;
+        public int TowerAttackSpeed { get { return towerAttackSpeed;} set { towerAttackSpeed = value;}}
+        
+        protected int towerRange;
+        public int TowerRange { get { return towerRange;} set { towerRange = value;}}
+        
+        protected int towerCost;
         public int TowerCost { get { return towerCost;} set { towerCost = value;} }
 
         public virtual void SetTowerName(string name)
@@ -34,6 +50,31 @@ namespace Towers
                 return;
             }
             transform.name = name;
+        }
+
+        public virtual void IncreaseTowerHealt(float value)
+        {
+            if(towerHealt < maxTowerHealt)
+            {
+                towerHealt += value;
+            }
+            else
+            {
+                towerHealt = maxTowerHealt;
+            }
+        }
+
+        public virtual void ReductionTowerHealt(float value)
+        {
+            if(towerHealt > 0)
+            {
+                towerHealt -= value;
+            }
+            else if(towerHealt <= 0)
+            {
+                towerHealt = 0;
+                Destroy(gameObject);
+            }
         }
 
         public virtual void SetTowerPosition(Vector3 newPos)

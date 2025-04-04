@@ -17,6 +17,7 @@ namespace Enemy.Bullet
         protected int bulletDamage;
 
         protected float bulletLifeTime;
+        protected int bulletSpeed;
 
         void Awake()
         {
@@ -28,11 +29,7 @@ namespace Enemy.Bullet
             bulletTarget = target;
         }
 
-        public virtual void BulletMove(GameObject target)
-        {
-            rb2D.AddForce(target.transform.position);
-        }
-
+        
     }
 
 }

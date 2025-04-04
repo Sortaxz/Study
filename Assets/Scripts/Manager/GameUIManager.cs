@@ -19,8 +19,12 @@ public class GameUIManager : MonoBehaviour
 
     [SerializeField] private Transform[] enemyPositions;
     public Transform[] EnemyPositions => enemyPositions;
+    
+    private Transform target;
+    public Transform Target => Target;
 
-    [SerializeField] private Transform target;
-    public Transform Target => target;
+    [SerializeField] private Transform towerPositionObjectsParent;
+    [SerializeField] private Transform[] towerPositions;
+    public Transform[] TowerPositions => towerPositions;
 
 }

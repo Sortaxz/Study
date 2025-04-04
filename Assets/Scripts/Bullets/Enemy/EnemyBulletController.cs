@@ -52,17 +52,17 @@ namespace Enemy.Bullet
         
         }
 
-        public void ReturnEnemyBulletToPool(Queue<EnemyBullet> enemyBullets,EnemyBullet enemyBullet)
+        public void ReturnEnemyBulletToPool(Queue<EnemyBullet> enemyBullets,EnemyBullet enemyBullet,Vector2 pos)
         {
+            enemyBullet.transform.position = pos;
             enemyBullet.gameObject.SetActive(false);
             enemyBullets.Enqueue(enemyBullet);
         }
 
-        internal IEnumerator DisableEnemyBulletAfterDelay(Queue<EnemyBullet> enemyBullets,EnemyBullet enemyBullet,float delay)
+        internal IEnumerator DisableEnemyBulletAfterDelay(Queue<EnemyBullet> enemyBullets,EnemyBullet enemyBullet,Vector2 pos,float delay)
         {
             yield return new WaitForSeconds(delay);
-            Debug.Log("havuza geri dönüyor");
-            ReturnEnemyBulletToPool(enemyBullets,enemyBullet);
+            ReturnEnemyBulletToPool(enemyBullets,enemyBullet,pos);
         }
 
     }

@@ -28,13 +28,12 @@ namespace Enemy
                 enemyBulletController = new EnemyBulletController();    
             }
             
-            print(transform.name + "-" + transform.position);
             
             if(transform.GetChild(0).childCount < 1)
             {
-                _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.CreateEnemyBullets(transform.GetChild(0).transform,10));
+                _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.CreateEnemyBullets(transform.GetChild(0).transform,1));
             }
-            else if(transform.GetChild(0).childCount > 1)
+            else if(transform.GetChild(0).childCount >= 1)
             {
                 _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.GetEnemyBulletFromEnemyBulletsList(transform.GetChild(0)));
                 bullets = _enemyBullets.ToList();
@@ -71,7 +70,7 @@ namespace Enemy
                 }
                 else
                 {
-                    this.EnemyAttackFunction(100);
+                    EnemyAttackFunction(100);
 
                     
                 }
@@ -79,16 +78,9 @@ namespace Enemy
             }
         }
 
-        private void FindTargetDistance(GameObject target)
-        {
-            float distance = Vector3.Distance(transform.position, target.transform.position);   
-            if(distance <= .5f)
-            {
+       
 
-                isFire = true;
-            }
-        }
-
+        [SerializeField] private GameObject collisionTarget;
 
         void OnTriggerStay2D(Collider2D collision)
         {
@@ -108,29 +100,34 @@ namespace Enemy
             {
                 case "ArcherTower":
                     isFire = value;
+                    collisionTarget = targetTower;
                 break;
                 case "FireTower":
                     isFire = value;
+                    collisionTarget = targetTower;
                 break;
                 case "IceTower":
                     isFire = value;
+                    collisionTarget = targetTower;
                 break;
                 case "TowerBullet":
                     isFire = value;
+                    collisionTarget = targetTower;
                 break;
                 case "MainTower":
                     isFire = value;
+                    collisionTarget = targetTower;
                 break;
                 default:
                 break;
             }
+            
         }
 
         private float a = 0;
 
         public override void EnemyAttackFunction(int damageValue)
         {
-            print("attak yapiyor");
             a += Time.deltaTime * .5f;
 
             if (a > 1)
@@ -138,29 +135,18 @@ namespace Enemy
                 if(_enemyBullets.Count > 0 )
                 {
                     EnemyBullet enemyBullet = enemyBulletController.GetEnemyBulletFromPool(_enemyBullets);
-                    StartCoroutine(enemyBulletController.DisableEnemyBulletAfterDelay(_enemyBullets,enemyBullet,3));
+                    enemyBullet.EnemyBulletMovement(collisionTarget.transform);
+                    Vector2 pos = transform.GetChild(0).transform.position;
+                    StartCoroutine(enemyBulletController.DisableEnemyBulletAfterDelay(_enemyBullets,enemyBullet,pos,3));
                 } 
-                else
-                {
-                    print("0");
-                }
+               
                 a = 0;
             }
         }
        
        
 
-        void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                foreach (var item in _enemyBullets)
-                {
-                    print(item);
-                }
-            }
-        }
-
+      
 
         void OnEnable()
         {
