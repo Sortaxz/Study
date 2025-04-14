@@ -6,9 +6,8 @@ namespace Towers
 {
     public class ArcherTowerFactory : IArcherTowerFactory
     {
-        public Tower Create(TowerName towerName,Vector3 towerPosition)
+        public Tower Create(TowerName towerName,Vector3 towerPosition,int index)
         {
-            
            
             GameObject tower = null;
             GameObject prefab = null;
@@ -17,7 +16,7 @@ namespace Towers
             if(prefab != null)
             {
                 tower = GameObject.Instantiate(prefab);
-                tower.name = tower.name.Replace("(Clone)","");
+                tower.name = tower.name.Replace("_1(Clone)",$"_ {index}");
             }
                         
 

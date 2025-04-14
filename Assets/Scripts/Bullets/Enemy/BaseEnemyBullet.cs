@@ -8,7 +8,7 @@ namespace Enemy.Bullet
     {
         protected GameObject bulletTarget;
 
-        private Rigidbody2D rb2D;
+        protected Rigidbody2D rb2D;
 
         private AudioClip fireSound;
 

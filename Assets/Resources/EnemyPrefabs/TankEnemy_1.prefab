@@ -142,3 +142,6 @@ MonoBehaviour:
   _enemyAttack: 0
   _enemyDefense: 0
   isFire: 0
+  bullets: []
+  enemyBullet1: {fileID: 0}
+  collisionTarget: {fileID: 0}

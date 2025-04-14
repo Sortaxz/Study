@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TowerBulletControl;
 using UnityEngine;
 
 namespace Towers
 {
     public abstract class Tower : MonoBehaviour
     {
+        [SerializeField] protected GameObject towerTargetPriority;
+        public GameObject TowerTargetPriority { get { return towerTargetPriority;} set { towerTargetPriority = value;}}
+        
+        [SerializeField] protected List<TowerBullet> towerBullet;
+        protected TowerBulletController towerBulletController;
+        
         protected TowerAttackType towerAttackType; 
         public TowerAttackType TowerAttackType { get { return towerAttackType;} set { towerAttackType = value;}}
-        protected GameObject towerTargetPriority;
-        public GameObject TowerTargetPriority { get { return towerTargetPriority;} set { towerTargetPriority = value;}}
         
         [SerializeField] protected TowerBullet towerBulletPrefab;
         public TowerBullet TowerBulletPrefab => towerBulletPrefab;
@@ -17,7 +22,7 @@ namespace Towers
         [SerializeField] protected Transform towerBulletsParent;
         public Transform TowerBulletsParent => towerBulletsParent;
 
-        protected Queue<TowerBullet> towerBullets;
+        [SerializeField] protected Queue<TowerBullet> towerBullets;
         public Queue<TowerBullet> TowerBullets => towerBullets;
 
         protected string towerName;
@@ -88,6 +93,60 @@ namespace Towers
         public abstract void SetTowerRange(int range);
         public abstract void SetTowerTargetPriority(GameObject targetPriority);
         public abstract void SetTowerCost(int cost);
+
+        
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
+            SetTowerTargetPriority(collision.gameObject);
+            
+            StandartFire(collision.gameObject);
+        }
+
+
+        void OnTriggerStay2D(Collider2D collision)
+        {
+            if(towerTargetPriority == null)
+            {
+                if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
+                SetTowerTargetPriority(collision.gameObject);
+            }
+
+        }
+
+        void OnTriggerExit2D(Collider2D collision)
+        {
+            if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
+            {
+                towerTargetPriority = null;
+            }
+        }
+
+        
+        internal virtual void StandartFire(GameObject collision)
+        {
+            if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
+                StartCoroutine(ArcherTowerStandartFire(collision));
+        }
+
+        internal virtual IEnumerator ArcherTowerStandartFire(GameObject collision)
+        {
+            while(towerTargetPriority != null)
+            {
+                if(towerTargetPriority != null)
+                {
+                    if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
+                    towerBullet.Add(towerBulletController.GetFromTowerBulletList(collision.gameObject));
+
+                }
+                else
+                {
+                    StopCoroutine(ArcherTowerStandartFire(collision));
+                }
+                yield return new WaitForSeconds(3);  
+            }
+        }
+
     }
 
 }

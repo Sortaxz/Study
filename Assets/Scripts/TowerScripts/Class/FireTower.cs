@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TowerBulletControl;
+using TowerBulletEnums;
 using UnityEngine;
 
 namespace Towers
 {
-    public class FireTower : Tower,IFireTower
+    public class FireTower : Tower
     {
         void Awake()
         {
             towerHealt = 100;
+            towerBulletController = new TowerBulletController();
+            towerBulletController.CreateTowerBullet(transform,Vector3.zero,TowerBulletTypeEnum.ArcherTowerBullet,TowerBulletNameEnum.ArcherTowerBullet_1,10);
         }
 
         public override void SetTowerAttackSpeed(int attackSpeed)
@@ -43,10 +47,7 @@ namespace Towers
 
         
 
-        void OnTriggerEnter2D(Collider2D collision)
-        {
-            print(collision.gameObject.name);
-        }
+        
     }
 
 }

@@ -84,19 +84,30 @@ namespace Enemy
 
         void OnTriggerStay2D(Collider2D collision)
         {
-            TargetTowerTypeFind(collision.gameObject,true);
+            //TargetTowerTypeFind(collision.gameObject,true);
             
         }
 
         void OnTriggerExit2D(Collider2D collision)
         {
-            TargetTowerTypeFind(collision.gameObject,false);
+            //TargetTowerTypeFind(collision.gameObject,false);
         }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            TargetTowerTypeFind(collision.collider.gameObject,true);
+        }
+
+        void OnCollisionExit2D(Collision2D collision)
+        {
+            TargetTowerTypeFind(collision.collider.gameObject,false);
+        }
+
 
 
         private void TargetTowerTypeFind(GameObject targetTower,bool value)
         {
-            switch(targetTower.tag)
+            switch(targetTower.gameObject.tag)
             {
                 case "ArcherTower":
                     isFire = value;

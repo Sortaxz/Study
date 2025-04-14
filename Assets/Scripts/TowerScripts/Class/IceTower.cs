@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Towers
 {
-    public class IceTower : Tower,IIceTower
+    public class IceTower : Tower
     {
+
         void Awake()
         {
             towerHealt = 100;

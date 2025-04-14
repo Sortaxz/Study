@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Towers;
 using UnityEngine;
 
-public class MainTower : Tower, IArcherTower
+public class MainTower : Tower
 {
+
     void Awake()
     {
         towerHealt = 100;

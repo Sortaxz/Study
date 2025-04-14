@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Towers;
 using UnityEngine;
 
-public class BaseTowerBullet : MonoBehaviour
+public abstract class BaseTowerBullet : MonoBehaviour
 {
-    protected string towerBulletName;
-    public string TowerBulletName=>towerBulletName;
 
-    protected GameObject towerBulletTarget;
+    [SerializeField] protected GameObject towerBulletTarget;
 
     private Rigidbody2D towerBulletRb2D;
 
@@ -15,9 +14,14 @@ public class BaseTowerBullet : MonoBehaviour
 
     private ParticleSystem towerBulletFireParticleEffect;
 
+    public delegate void TowerBulletDestroy();
+    public TowerBulletDestroy towerBulletDestroy;
+
+    protected string towerBulletName;
+    public string TowerBulletName=>towerBulletName;
+    protected float towerBulletLifeTime;
     protected int towerBulletDamage;
 
-    protected float towerBulletLifeTime;
     protected int towerBulletSpeed;
 
     void Awake()
@@ -32,9 +36,22 @@ public class BaseTowerBullet : MonoBehaviour
         towerBulletName = newTowerBulletName;
     }
 
-    public virtual void SetTowerBulletTarget(GameObject target)
+    public virtual void SetTowerBulletTarget(GameObject target,TowerBulletDestroy _towerBulletDestroy)
     {
+        towerBulletDestroy = _towerBulletDestroy;
         towerBulletTarget = target;
+        gameObject.SetActive(true);
+    }
+
+    public abstract void SetTowerBulletParent(Transform parent,TowerBulletDestroy towerBulletDestroy);
+
+   
+    public abstract IEnumerator MovementToTarget(Transform target,float time);
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.gameObject.tag != "TowerBullet" & !collision.collider.GetComponent<Tower>())
+        towerBulletDestroy();
     }
 
 }

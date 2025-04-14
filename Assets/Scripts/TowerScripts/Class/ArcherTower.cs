@@ -1,34 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using ArcherTowerFireInterfes;
+using Enemy;
+using TowerBulletControl;
+using TowerBulletEnums;
 using UnityEngine;
 
 namespace Towers
 {
-    public class ArcherTower : Tower,IArcherTower
+    public class ArcherTower : Tower
     {
+
+        private GameObject target;
+
+
         void Awake()
         {
-            towerBullets = new Queue<TowerBullet>();
-            towerHealt = 100;
-            towerBulletPrefab = Resources.Load<TowerBullet>("Tower/Bullets/TowerBullet");
-            for (int i = 0; i < 10; i++)
-            {
-                TowerBullet newTowerBullet = Instantiate(towerBulletPrefab);
-                newTowerBullet.gameObject.SetActive(false);
-                newTowerBullet.SetTowerBulletName("TowerBullet",i);
-                towerBullets.Enqueue(newTowerBullet);
-            }
+            towerBulletController = new TowerBulletController();
+            towerBulletController.CreateTowerBullet(transform,Vector3.zero,TowerBulletTypeEnum.ArcherTowerBullet,TowerBulletNameEnum.ArcherTowerBullet_1,10);
         }
 
         void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                foreach (var item in towerBullets)
-                {
-                    print(item);
-                }
-            }
+           
         }
 
         public override void SetTowerAttackSpeed(int attackSpeed)
@@ -56,17 +50,17 @@ namespace Towers
             TowerRange = range;
         }
 
-        public override void SetTowerTargetPriority(GameObject targetPriority)
+        public override void SetTowerTargetPriority(GameObject _targetPriority)
         {
-            TowerTargetPriority = targetPriority;
+            if(towerTargetPriority !=  _targetPriority  && _targetPriority.GetComponent<BaseEnemy>() != null)
+            {
+                towerTargetPriority = _targetPriority;
+
+            }
         }
 
-       
-
-        void OnTriggerEnter2D(Collider2D collision)
-        {
-            print(collision.gameObject.name);
-        }
+        
+        
     }
 
 }

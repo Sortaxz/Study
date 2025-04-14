@@ -15,6 +15,7 @@ TagManager:
   - MeleeEnemy
   - RangeEnemy
   - TankEnemy
+  - TowerRange
   layers:
   - Default
   - TransparentFX

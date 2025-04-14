@@ -22,10 +22,14 @@ public class GameManager : MonoBehaviour
 
     EnemyFactory enemyFactory;
 
+    [SerializeField] private GameObject towerBullet;
 
+    [SerializeField] private Dictionary<string,Tower> towers = new Dictionary<string,Tower>();
+    TowerCreator towerCreator;
     void Awake()
     {
         enemyFactory = new EnemyFactory();
+        towerCreator =  new TowerCreator();
     }
 
     void Update()
@@ -40,15 +44,14 @@ public class GameManager : MonoBehaviour
             BossEnemy bossEnemy1 = enemyFactory.Create(EnemyNameEnum.BossEnemy_1, GameUIManager.Instance.EnemyPositions[0].position) as BossEnemy;
             enemyFactory.SaveEnemyTypeFindToList(bossEnemy1);
             bossEnemy1.SetEnemyAttack(null, 500, 1000);
-            bossEnemy1.SetTargetMovement(GameUIManager.Instance.Target.position);
+            bossEnemy1.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
 
         }
 
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            TowerCreator towerCreator = new TowerCreator();
-            towerCreator.Create(new ArcherTowerFactory(), TowerName.ArcherTower_1,Vector2.zero);
+            CreateTower();
 
         }
 
@@ -69,7 +72,12 @@ public class GameManager : MonoBehaviour
 
 
 
-
+    private void CreateTower()
+    {
+        
+        ArcherTower archerTower = towerCreator.Create(new ArcherTowerFactory(), TowerName.ArcherTower_1, Vector2.zero) as ArcherTower;
+        towers.Add(archerTower.gameObject.name,archerTower);
+    }
 
 
 

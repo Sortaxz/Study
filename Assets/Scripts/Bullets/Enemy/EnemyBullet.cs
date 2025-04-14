@@ -12,7 +12,6 @@ namespace Enemy.Bullet
         [SerializeField]private FireTower enemyBulletCollisionFireTower;
         [SerializeField]private IceTower enemyBulletCollisionIceTower;
         [SerializeField]private GameObject enemyBulletCollisionMaiTower;
-        [SerializeField] Rigidbody2D rb2D;
         [SerializeField] private GameObject target;
         void Awake()
         {
@@ -32,6 +31,12 @@ namespace Enemy.Bullet
 
         void OnTriggerEnter2D(Collider2D collision)
         {
+            //FindEnemyBulletCollisonGameObject(collision.gameObject);
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            print(collision.collider.gameObject.name);
             FindEnemyBulletCollisonGameObject(collision.gameObject);
         }
 
@@ -77,7 +82,10 @@ namespace Enemy.Bullet
 
         void Update()
         {
-            transform.position = Vector3.MoveTowards(transform.position,target.transform.position,5 * Time.deltaTime );
+            if(target != null)
+            {
+                transform.position = Vector3.MoveTowards(transform.position,target.transform.position,5 * Time.deltaTime );
+            }
         }
 
         void FixedUpdate()

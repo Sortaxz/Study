@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3442656401660327426}
   m_Layer: 0
   m_Name: TowerBullet
-  m_TagString: Untagged
+  m_TagString: TowerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,3 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d97d0baa2de0c346b33204075f95cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerBulletTarget: {fileID: 0}
