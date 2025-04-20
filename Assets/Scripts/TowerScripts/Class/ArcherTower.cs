@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using ArcherTowerFireInterfes;
 using Enemy;
 using TowerBulletControl;
 using TowerBulletEnums;
@@ -16,14 +15,13 @@ namespace Towers
 
         void Awake()
         {
+            towerUIController = GetComponent<TowerUIController>();
+            towerUIController.SetHealtBarValue(towerHealt);
             towerBulletController = new TowerBulletController();
             towerBulletController.CreateTowerBullet(transform,Vector3.zero,TowerBulletTypeEnum.ArcherTowerBullet,TowerBulletNameEnum.ArcherTowerBullet_1,10);
         }
 
-        void Update()
-        {
-           
-        }
+        
 
         public override void SetTowerAttackSpeed(int attackSpeed)
         {

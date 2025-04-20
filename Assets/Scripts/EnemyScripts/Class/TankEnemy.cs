@@ -8,15 +8,10 @@ namespace Enemy
 {
     public class TankEnemy : BaseEnemy,ITankEnemy
     {
-        Vector3 pos = Vector3.zero;
 
 
         [SerializeField] List<EnemyBullet> bullets;
-        Queue<EnemyBullet> _enemyBullets = new Queue<EnemyBullet>();
-        [SerializeField] private EnemyBullet enemyBullet1;
-
-        private EnemyBulletController enemyBulletController;
-
+        
 
 
         private void Awake()
@@ -46,119 +41,6 @@ namespace Enemy
 
 
 
-        public void Movement(Vector3 target)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * 2);
-        }
-
-        public void SetTargetMovement(Vector3 target)
-        {
-            pos = target;
-            StartCoroutine(Move());
-        }
-
-        private IEnumerator Move()
-        {
-            while (transform.position != pos)
-            {
-                if (!isFire)
-                {
-                    Movement(pos);
-                }
-                else
-                {
-                    this.EnemyAttackFunction(100);
-
-
-                }
-                yield return null;
-            }
-        }
-
-        private void FindTargetDistance(GameObject target)
-        {
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            if (distance <= .5f)
-            {
-
-                isFire = true;
-            }
-        }
-
-        [SerializeField] private GameObject collisionTarget;
-
-        void OnTriggerStay2D(Collider2D collision)
-        {
-            TargetTowerTypeFind(collision.gameObject, true);
-
-        }
-
-        void OnTriggerExit2D(Collider2D collision)
-        {
-            TargetTowerTypeFind(collision.gameObject, false);
-        }
-
-
-        private void TargetTowerTypeFind(GameObject targetTower, bool value)
-        {
-            switch (targetTower.tag)
-            {
-                case "ArcherTower":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                    break;
-                case "FireTower":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                    break;
-                case "IceTower":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                    break;
-                case "TowerBullet":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                    break;
-                case "MainTower":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-        private float a = 0;
-
-        public override void EnemyAttackFunction(int damageValue)
-        {
-            a += Time.deltaTime * .5f;
-
-            if (a > 1)
-            {
-                if (_enemyBullets.Count > 0)
-                {
-                    EnemyBullet enemyBullet = enemyBulletController.GetEnemyBulletFromPool(_enemyBullets);
-                    enemyBullet.EnemyBulletMovement(collisionTarget.transform);
-                    Vector2 pos = transform.GetChild(0).transform.position;
-                    StartCoroutine(enemyBulletController.DisableEnemyBulletAfterDelay(_enemyBullets,enemyBullet,pos,3));
-                }
-
-                a = 0;
-            }
-        }
-
-
-
-
-
-        void OnEnable()
-        {
-            StopCoroutine(Move());
-        }
-
-        
     }
 
 }

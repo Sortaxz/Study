@@ -36,7 +36,6 @@ namespace Enemy.Bullet
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            print(collision.collider.gameObject.name);
             FindEnemyBulletCollisonGameObject(collision.gameObject);
         }
 
@@ -47,7 +46,7 @@ namespace Enemy.Bullet
                 case "ArcherTower":
                     enemyBulletCollisionArcherTower = collisionGameObject.GetComponent<ArcherTower>();
                     gameObject.SetActive(false);
-                    enemyBulletCollisionArcherTower.ReductionTowerHealt(50);
+                    enemyBulletCollisionArcherTower.ReductionTowerHealt(bulletDamage);
                 break;
                 
                 case "FireTower":
@@ -63,6 +62,7 @@ namespace Enemy.Bullet
                 case "MainTower":
                     enemyBulletCollisionMaiTower = collisionGameObject;
                     gameObject.SetActive(false);
+                    MainTower.MainTowerDamaged(collisionGameObject,bulletDamage);
                 break;
                 
                 default:

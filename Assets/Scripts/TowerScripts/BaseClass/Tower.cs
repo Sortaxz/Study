@@ -10,6 +10,9 @@ namespace Towers
         [SerializeField] protected GameObject towerTargetPriority;
         public GameObject TowerTargetPriority { get { return towerTargetPriority;} set { towerTargetPriority = value;}}
         
+        [SerializeField] protected TowerUIController towerUIController;
+        public TowerUIController TowerUIController => towerUIController;
+
         [SerializeField] protected List<TowerBullet> towerBullet;
         protected TowerBulletController towerBulletController;
         
@@ -47,6 +50,11 @@ namespace Towers
         protected int towerCost;
         public int TowerCost { get { return towerCost;} set { towerCost = value;} }
 
+
+        protected bool isStop = false;
+        
+        protected bool isPause = false;
+
         public virtual void SetTowerName(string name)
         {
             if(transform.name.Contains("(Clone)"))
@@ -57,30 +65,38 @@ namespace Towers
             transform.name = name;
         }
 
-        public virtual void IncreaseTowerHealt(float value)
-        {
-            if(towerHealt < maxTowerHealt)
-            {
-                towerHealt += value;
-            }
-            else
-            {
-                towerHealt = maxTowerHealt;
-            }
-        }
 
-        public virtual void ReductionTowerHealt(float value)
-        {
-            if(towerHealt > 0)
+         #region  Kule'nin canini ayarlayabileceğin methodlar ve propert'ler
+
+            public virtual void IncreaseTowerHealt(float value)
             {
-                towerHealt -= value;
+                if(towerHealt < maxTowerHealt)
+                {
+                    towerHealt += value;
+                }
+                else
+                {
+                    towerHealt = maxTowerHealt;
+                }
+                towerUIController.HealtBarValueIncrease(towerHealt);
             }
-            else if(towerHealt <= 0)
+
+            public virtual void ReductionTowerHealt(float value)
             {
-                towerHealt = 0;
-                Destroy(gameObject);
+                if(towerHealt > 0)
+                {
+                    towerHealt -= value;
+                }
+                else if(towerHealt <= 0)
+                {
+                    towerHealt = 0;
+                    Destroy(gameObject);
+                }
+                towerUIController.HealtBarValueIncrease(towerHealt);
             }
-        }
+
+        #endregion
+
 
         public virtual void SetTowerPosition(Vector3 newPos)
         {
@@ -131,22 +147,37 @@ namespace Towers
 
         internal virtual IEnumerator ArcherTowerStandartFire(GameObject collision)
         {
-            while(towerTargetPriority != null)
+            if(towerTargetPriority != null)
             {
-                if(towerTargetPriority != null)
+                while(!isStop)
                 {
-                    if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
-                    towerBullet.Add(towerBulletController.GetFromTowerBulletList(collision.gameObject));
+                    if(!isPause)
+                    {
+                        if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
+                        towerBullet.Add(towerBulletController.GetFromTowerBulletList(collision.gameObject));
+                    }
+                    yield return new WaitForSeconds(3);  
+                }
 
-                }
-                else
-                {
-                    StopCoroutine(ArcherTowerStandartFire(collision));
-                }
-                yield return new WaitForSeconds(3);  
             }
         }
 
+        public void TowerFunctionPause()
+        {
+
+        }
+
+        public void TowerFunctionResume()
+        {
+            
+        }
+
+        public void TowerFunctionStop()
+        {
+
+        }
+
+       
     }
 
 }

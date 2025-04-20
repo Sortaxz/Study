@@ -20,11 +20,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    EnemyFactory enemyFactory;
 
     [SerializeField] private GameObject towerBullet;
+    EnemyFactory enemyFactory;
 
-    [SerializeField] private Dictionary<string,Tower> towers = new Dictionary<string,Tower>();
+    [SerializeField] private Tower[] towers;
     TowerCreator towerCreator;
     void Awake()
     {
@@ -55,17 +55,30 @@ public class GameManager : MonoBehaviour
 
         }
 
-       
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            enemyFactory.EnemyFunctionStop();
+        }
+
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            enemyFactory.EnemyFunctionStart();
+        }
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            Tower[] towers = towerCreator.GetTowerList();
+            
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
-            /*
             Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            TowerCreator towerCreator = new TowerCreator();
-            ArcherTower archerTower = (ArcherTower)towerCreator.Create(new ArcherTowerFactory(),TowerName.ArcherTower_1,Vector2.zero);
-            archerTower.SetTowerPosition(new Vector3(newPos.x, newPos.y,-1));
-            archerTower.SetTowerName(archerTower.name);
-            */
+            if(newPos.y < 1 && newPos.y > -3f)
+            {
+                CreateTower(newPos);
+                A();
+            }
         }
 
     }
@@ -74,71 +87,41 @@ public class GameManager : MonoBehaviour
 
     private void CreateTower()
     {
-        
+
         ArcherTower archerTower = towerCreator.Create(new ArcherTowerFactory(), TowerName.ArcherTower_1, Vector2.zero) as ArcherTower;
-        towers.Add(archerTower.gameObject.name,archerTower);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #region  Abstract Factory ve Builder Design Pattern
-
-    //Abstract Factory kullanarak çok class oluşturulduğundan dolayı başka daha düzgün olması bu durum da kullanılan bir
-    //Design pattern bulup onu uygulayacağım.
-
-    /*
-    public Enemy CreateEnemy(EnemyType enemyType)
-    {
-        Enemy newEnemyScript = EnemyCreator.Creator(enemyType);
         
-        newEnemyScript.gameObject.name = newEnemyScript.EnemyName;
-        return newEnemyScript;
+        
     }
-    
 
-    public Character CreateCharacter(CharacterType characterType)
+    public void A()
     {
-        CharacterCreator characterCreator = new CharacterCreator();
-        Character character = characterCreator.CreateCharacter(characterType);
-        character.gameObject.name = character.CharacterName;
-        return character;
+        towers = towerCreator.GetTowerList();
     }
 
-    public void CloneCharacter(Character character,string cloneCharacterName)
+    private void CreateTower(Vector2 pos)
     {
-        GameObject cloneCharacter = Instantiate(character.gameObject);
-        cloneCharacter.name = cloneCharacterName;
-        Character cloneCharacterScript = cloneCharacter.GetComponent<Character>();
-        cloneCharacterScript = character.Clone(); 
+
+        ArcherTower archerTower = (ArcherTower)towerCreator.Create(new ArcherTowerFactory(), TowerName.ArcherTower_1, Vector2.zero);
+        archerTower.SetTowerPosition(new Vector3(pos.x, pos.y, -1));
+        archerTower.SetTowerName(archerTower.name);
     }
 
-    #endregion
 
-    #region  Adapter Design Patter
 
-    private void AdapterDesignPatter()
+    public static void GameOver()
     {
-        GamepadController gamepadController = new GamepadController();
-        IPlayerController playerController = new GamepadAdapter(gamepadController);
-
-        InputControllerAdapter inputControllerAdapter = new InputControllerAdapter(playerController);
-    
-        inputControllerAdapter.InputMove();
+        UIManager.Instance.OpenLoseFinalPanel();
     }
-    
-    #endregion
-*/
-    #endregion
+
+    public static void GameWon()
+    {
+       UIManager.Instance.OpenWinFinalPanel();
+        
+    }
+
+
+
+
+
 
 }

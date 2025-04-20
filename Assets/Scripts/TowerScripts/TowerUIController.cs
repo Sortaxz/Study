@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerUIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Image healtBar;
+
+    public void SetHealtBarValue(float towerHealt)
     {
-        
+        float a = towerHealt / 100f;
+        healtBar.fillAmount = a;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void HealtBarValueIncrease(float towerHealt)
     {
-        
+        SetHealtBarValue(towerHealt);
     }
+
+    public void HealtBarValueReduction(float towerHealt)
+    {
+        SetHealtBarValue(towerHealt);
+    }
+
 }

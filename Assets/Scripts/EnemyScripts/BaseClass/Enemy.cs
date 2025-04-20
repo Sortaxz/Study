@@ -2,13 +2,23 @@ using Enemy.Bullet;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Enemy.UIController;
 
 namespace Enemy
 {
     public abstract class BaseEnemy :MonoBehaviour
     {
+
         protected GameObject target;
-        protected Vector3 newPos;
+
+        [SerializeField] protected EnemyUIController enemyUIController;
+        protected EnemyBulletController enemyBulletController;
+
+
+        protected Queue<EnemyBullet> _enemyBullets = new Queue<EnemyBullet>();
+        [SerializeField] protected EnemyBullet enemyBullet1;
+        
+        protected Vector3 pos;
 
         [SerializeField] protected string _enemyName;
         public string EnemyName => _enemyName;
@@ -24,6 +34,9 @@ namespace Enemy
 
         protected float _enemyMaxSpeed;
         public float MaxEnemyMaxSpeed => _enemyMaxSpeed;
+
+        protected float _enemyMaxAttack;
+        public float MaxEnemyMaxAttack => _enemyMaxAttack;
 
 
         [SerializeField] protected int _enemyShield;
@@ -43,21 +56,30 @@ namespace Enemy
         [SerializeField] protected int _enemyAttack;
         public int EnemyAttack {get {return _enemyAttack;} set {_enemyAttack = value;} }
 
-        protected float _enemyMaxAttack;
-        public float MaxEnemyMaxAttack => _enemyMaxAttack;
-        
         [SerializeField] protected int _enemyDefense;
         public int EnemyDefense => _enemyDefense;
 
         private int _enemyMaxDefense;
         public int EnemyMaxDefense => _enemyMaxDefense;            
 
+        [SerializeField] protected int botyGold = 0; 
+
+
         [SerializeField] protected bool isFire;
         public bool IsFire => isFire;
 
-        public void SetEnemyName(string name)
+        [SerializeField] protected bool isStop = false;
+        public bool IsStop {get {return isStop;} set {isStop = value;}} 
+
+        [SerializeField] protected bool isPause = false;
+        public bool IsPause {get {return isPause;} set {isPause = value;}} 
+
+
+        public void SetEnemyName(string name,int index)
         {
             transform.name = name.Replace("(Clone)","");
+            transform.name = transform.name.Replace("0","");
+            transform.name += index.ToString();
             _enemyName = transform.name;
         }
 
@@ -69,7 +91,7 @@ namespace Enemy
         }
 
         public virtual void EnemyHealtIncrease(float healt)
-        {
+        { 
             if(_enemyHealt < _enemyMaxHealt)
             {
                 _enemyHealt += healt;
@@ -77,8 +99,8 @@ namespace Enemy
             else
             {
                 _enemyHealt = _enemyMaxHealt;
-                return;
             }
+            enemyUIController.HealtBarValueIncrease(_enemyHealt);
         }
 
         public virtual void EnemyHealtReduction(float value)
@@ -89,9 +111,10 @@ namespace Enemy
             }
             else
             {
+                EnemyDestroy();
                 _enemyHealt = 0;
-                return;
             }
+            enemyUIController.HealtBarValueReduction(_enemyHealt);
         }
 
         #endregion
@@ -220,9 +243,24 @@ namespace Enemy
             _enemyMaxAttack = enemyMaxAttack;
         }
 
-        public virtual void EnemyAttackFunction(int damageValue)
+        private float attackTime = 0;
+        public virtual void EnemyAttackFunction(float damageValue)
         {
-            print("attak yapiyor");
+            attackTime += Time.deltaTime * .5f;
+
+            if (attackTime > 1)
+            {
+                if(_enemyBullets.Count > 0 )
+                {
+                    EnemyBullet enemyBullet = enemyBulletController.GetEnemyBulletFromPool(_enemyBullets);
+                    enemyBullet.SetBulletDamage(damageValue);
+                    enemyBullet.EnemyBulletMovement(collisionTarget.transform);
+                    Vector2 pos = transform.GetChild(0).transform.position;
+                    StartCoroutine(enemyBulletController.DisableEnemyBulletAfterDelay(_enemyBullets,enemyBullet,pos,3));
+                } 
+               
+                attackTime = 0;
+            }
         }
 
 
@@ -271,6 +309,139 @@ namespace Enemy
                 baseEnemy.transform.GetChild(0).GetChild(i).gameObject.SetActive(false);
             }
         }
-    }
 
+        public static void EnemyHealtReductionFindEnemyType(GameObject gameObject, float value)
+        {
+            BaseEnemy enemy = gameObject.GetComponent<BaseEnemy>();
+            if(enemy)
+            {
+                enemy.EnemyHealtReduction(value);
+                return;
+            }
+            return;
+        }
+        
+        public virtual void EnemyDestroy()
+        {
+            gameObject.SetActive(false);
+        }
+
+
+
+        public virtual void SetTargetMovement(Vector3 target)
+        {
+            pos = target;
+            StartCoroutine(Move());
+        }
+
+        private  IEnumerator Move()
+        {
+            while (transform.position != pos && !isStop)
+            {
+                if(!isPause)
+                {
+                    if(!isFire)
+                    {
+                        Movement(pos);
+                    }
+                    else
+                    {
+                        EnemyAttackFunction(10);
+                    }
+
+                }
+                yield return null;
+            }
+        }
+
+        public virtual void Movement(Vector3 target)
+        {
+            if(!isPause && !isStop)
+            transform.position = Vector3.MoveTowards(transform.position,target, Time.deltaTime * 2);
+        }
+
+
+        [SerializeField] private GameObject collisionTarget;
+
+       
+
+        void OnCollisionStay2D(Collision2D collision)
+        {
+            TargetTowerTypeFind(collision.collider.gameObject,true);
+        }
+
+        void OnCollisionExit2D(Collision2D collision)
+        {
+            TargetTowerTypeFind(collision.collider.gameObject,false);
+        }
+
+
+
+        private void TargetTowerTypeFind(GameObject targetTower,bool value)
+        {
+            switch(targetTower.gameObject.tag)
+            {
+                case "ArcherTower":
+                    isFire = value;
+                    collisionTarget = targetTower;
+                break;
+                case "FireTower":
+                    isFire = value;
+                    collisionTarget = targetTower;
+                break;
+                case "IceTower":
+                    isFire = value;
+                    collisionTarget = targetTower;
+                break;
+                case "TowerBullet":
+                    isFire = value;
+                    collisionTarget = targetTower;
+                break;
+                case "MainTower":
+                    isFire = value;
+                    collisionTarget = targetTower;
+                break;
+                default:
+                break;
+            }
+            
+        }
+
+        public virtual void EnemyMovementPause()
+        {
+            isPause = true;
+            Time.timeScale = 0f;
+        }
+
+        public virtual void EnemyMovementResume()
+        {
+            isPause = false;
+            Time.timeScale = 1f;
+        }
+
+        public virtual void EnemyMovementStop()
+        {
+            isPause = true;
+            isStop = true;
+            Time.timeScale = 0;
+            
+        }
+
+        public virtual void EnemyMovementStart()
+        {
+            isPause = false;
+            
+            if(isStop) isStop = false;
+            Time.timeScale = 1f;
+            StartCoroutine(Move());
+        
+        }
+
+      
+
+        void OnEnable()
+        {
+            StopCoroutine(Move());
+        }
+    }
 }

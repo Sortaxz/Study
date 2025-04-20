@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyName: 
-  _enemyHealt: 0
+  _enemyHealt: 100
   _enemySpeed: 0
   _enemyShield: 0
   _enemyDamage: 0

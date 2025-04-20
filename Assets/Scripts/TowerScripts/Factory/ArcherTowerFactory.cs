@@ -17,8 +17,8 @@ namespace Towers
             {
                 tower = GameObject.Instantiate(prefab);
                 tower.name = tower.name.Replace("_1(Clone)",$"_ {index}");
+
             }
-                        
 
             return tower.GetComponent<ArcherTower>();
 

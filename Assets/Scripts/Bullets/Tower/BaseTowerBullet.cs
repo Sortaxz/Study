@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enemy;
 using Towers;
 using UnityEngine;
 
@@ -52,6 +53,8 @@ public abstract class BaseTowerBullet : MonoBehaviour
     {
         if(collision.collider.gameObject.tag != "TowerBullet" & !collision.collider.GetComponent<Tower>())
         towerBulletDestroy();
+    
+        BaseEnemy.EnemyHealtReductionFindEnemyType(collision.gameObject,20);
     }
 
 }

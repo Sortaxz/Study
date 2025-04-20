@@ -14,7 +14,7 @@ namespace Enemy.Bullet
 
         private ParticleSystem fireParticleEffect;
 
-        protected int bulletDamage;
+        protected float bulletDamage;
 
         protected float bulletLifeTime;
         protected int bulletSpeed;
@@ -29,7 +29,10 @@ namespace Enemy.Bullet
             bulletTarget = target;
         }
 
-        
+        public void SetBulletDamage(float damage)
+        {
+            bulletDamage = damage;
+        }
     }
 
 }

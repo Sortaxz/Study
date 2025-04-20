@@ -23,9 +23,16 @@ public class TowerBullet : BaseTowerBullet
 
     public override IEnumerator MovementToTarget(Transform target,float liveTime)
     {
-        Rigidbody2D.AddForce(towerBulletTarget.transform.position * 20);
-        yield return new WaitForSeconds(liveTime);
-        towerBulletDestroy();
+        if(target != null)
+        {
+            Rigidbody2D.AddForce(towerBulletTarget.transform.position * 20);
+            yield return new WaitForSeconds(liveTime);
+            towerBulletDestroy();
+        }
+        else
+        {
+            StopCoroutine(MovementToTarget(transform,liveTime));
+        }
     }
 
     void Update()

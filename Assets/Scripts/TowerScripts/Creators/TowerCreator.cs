@@ -1,5 +1,6 @@
 
-using Unity.Mathematics;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Towers
@@ -7,10 +8,14 @@ namespace Towers
     public class TowerCreator 
     {
         private int a = 0;
+        private Dictionary<string,Tower> towers = new Dictionary<string,Tower>();
+
         public Tower Create( ITowerFactor towerFactor,TowerName towerName,Vector2 towerPosition)
         {
             a++;
-            return CreateTower(towerFactor, towerName,towerPosition,a);
+            Tower tower =  CreateTower(towerFactor, towerName,towerPosition,a);
+            towers.Add(tower.name,tower);
+            return tower;
         }
 
         private Tower CreateTower(ITowerFactor towerFactor,TowerName towerName,Vector2 towerPosition,int index)
@@ -29,6 +34,11 @@ namespace Towers
                 default:
                     return null;
             }
+        }
+
+        public Tower[] GetTowerList()
+        {
+            return towers.Values.ToArray();
         }
 
     }
