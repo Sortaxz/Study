@@ -11,6 +11,7 @@ namespace Enemy
     {
 
         [SerializeField] List<EnemyBullet> bullets;
+        
 
         private void Awake() 
         {
@@ -35,7 +36,8 @@ namespace Enemy
                 
                 
             }
-            
+
+            botyGold = Random.Range(0,100);            
             
         }
 

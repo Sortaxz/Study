@@ -60,7 +60,7 @@ public class MainTower : MonoBehaviour
 
     public void MainTowerDestroy()
     {
-        GameManager.GameOver();
+        GameManager.Instance.GameOver();
         gameObject.SetActive(false);
     }
 

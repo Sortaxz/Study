@@ -67,18 +67,31 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.P))
         {
-            Tower[] towers = towerCreator.GetTowerList();
-            
+            towers = towerCreator.GetTowerList();
+            foreach (var item in towers)
+            {
+                item.TowerFunctionPause();
+            }
+        }
+        
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            foreach (var item in towers)
+            {
+                item.TowerFunctionResume();
+            }
         }
 
         if (Input.GetMouseButtonDown(0))
         {
+            /*
             Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if(newPos.y < 1 && newPos.y > -3f)
             {
                 CreateTower(newPos);
                 A();
             }
+            */
         }
 
     }
@@ -108,8 +121,10 @@ public class GameManager : MonoBehaviour
 
 
 
-    public static void GameOver()
+    public  void GameOver()
     {
+        enemyFactory.EnemyReset();
+        towerCreator.TowersReset();
         UIManager.Instance.OpenLoseFinalPanel();
     }
 

@@ -51,9 +51,9 @@ namespace Towers
         public int TowerCost { get { return towerCost;} set { towerCost = value;} }
 
 
-        protected bool isStop = false;
+        [SerializeField] protected bool isStop = false;
         
-        protected bool isPause = false;
+        [SerializeField] protected bool isPause = false;
 
         public virtual void SetTowerName(string name)
         {
@@ -164,17 +164,22 @@ namespace Towers
 
         public void TowerFunctionPause()
         {
-
+            isPause = true;
         }
 
         public void TowerFunctionResume()
         {
-            
+            isPause = false;
         }
 
         public void TowerFunctionStop()
         {
+            isStop = true;
+        }
 
+        public void TowerFunctionStart()
+        {
+            isStop = false;
         }
 
        

@@ -346,7 +346,7 @@ namespace Enemy
                     }
                     else
                     {
-                        EnemyAttackFunction(10);
+                        EnemyAttackFunction(110);
                     }
 
                 }

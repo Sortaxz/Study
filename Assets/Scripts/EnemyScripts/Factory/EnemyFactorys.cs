@@ -119,6 +119,22 @@ namespace EnemyFactorys
             }
         }
 
+        public void EnemyReset()
+        {
+            foreach (var item in enemyPool.Values)
+            {
+                GameObject.Destroy(item.gameObject);
+            }
+            
+            foreach (var item in baseEnemies.Values)
+            {
+                GameObject.Destroy(item.gameObject);
+            }
+
+            enemyPool.Clear();
+            baseEnemies.Clear();
+        }
+
     }
 
 }

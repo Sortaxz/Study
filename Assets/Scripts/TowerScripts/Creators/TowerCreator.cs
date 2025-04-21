@@ -41,6 +41,15 @@ namespace Towers
             return towers.Values.ToArray();
         }
 
+        public void TowersReset()
+        {
+            foreach (var item in towers.Values)
+            {
+                GameObject.Destroy(item.gameObject);
+            }
+            towers.Clear();
+        }
+
     }
 
 }
