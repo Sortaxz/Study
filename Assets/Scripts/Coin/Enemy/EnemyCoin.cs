@@ -8,11 +8,15 @@ namespace EnemyCoin
     public class EnemyCoin : MonoBehaviour
     {
         private Button button;
-        private int amount = 0;
+        [SerializeField] private int amount = 0;
 
         void Awake()
         {
-           
+            button = GetComponent<Button>();
+            button.onClick.AddListener(delegate
+            {
+                print("çalişiyor");
+            });
         }
 
         void Start()
@@ -24,6 +28,11 @@ namespace EnemyCoin
         void Update()
         {
 
+        }
+
+        public void SetAmount(int amount)
+        {
+            this.amount = amount;
         }
 
     }

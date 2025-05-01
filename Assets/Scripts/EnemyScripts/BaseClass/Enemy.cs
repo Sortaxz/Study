@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Enemy.UIController;
+using EnemyCoin.Factory;
 
 namespace Enemy
 {
@@ -18,6 +19,9 @@ namespace Enemy
         protected Queue<EnemyBullet> _enemyBullets = new Queue<EnemyBullet>();
         [SerializeField] protected EnemyBullet enemyBullet1;
         
+        protected EnemyCoinFactory enemyCoinFactory;
+
+
         protected Vector3 pos;
 
         [SerializeField] protected string _enemyName;
@@ -62,7 +66,7 @@ namespace Enemy
         private int _enemyMaxDefense;
         public int EnemyMaxDefense => _enemyMaxDefense;            
 
-        [SerializeField] protected int botyGold = 0; 
+        [SerializeField] protected int botyGold; 
 
 
         [SerializeField] protected bool isFire;
@@ -72,8 +76,11 @@ namespace Enemy
         public bool IsStop {get {return isStop;} set {isStop = value;}} 
 
         [SerializeField] protected bool isPause = false;
-        public bool IsPause {get {return isPause;} set {isPause = value;}} 
+        public bool IsPause {get {return isPause;} set {isPause = value;}}
 
+        void Awake()
+        {
+        }
 
         public void SetEnemyName(string name,int index)
         {
@@ -323,7 +330,9 @@ namespace Enemy
         
         public virtual void EnemyDestroy()
         {
+            enemyCoinFactory.EnemyCoinCreate(EnemyCoin.NameEnum.EnemyCoinNameEnum.EnemCoin_1,botyGold);
             gameObject.SetActive(false);
+
         }
 
 
@@ -346,7 +355,7 @@ namespace Enemy
                     }
                     else
                     {
-                        EnemyAttackFunction(110);
+                        EnemyAttackFunction(10);
                     }
 
                 }

@@ -180,6 +180,7 @@ namespace Towers
         public void TowerFunctionStart()
         {
             isStop = false;
+            isPause = false;
         }
 
        

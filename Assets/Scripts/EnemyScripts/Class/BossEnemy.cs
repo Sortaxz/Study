@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Enemy.Bullet;
 using Enemy.UIController;
+using EnemyCoin.Factory;
 using UnityEngine;
 
 namespace Enemy
@@ -39,10 +40,22 @@ namespace Enemy
 
             botyGold = Random.Range(0,100);            
             
+            if(enemyCoinFactory == null)
+            {
+                enemyCoinFactory = new EnemyCoinFactory();
+            }
         }
 
-        
-        
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.U))
+            {
+                EnemyDestroy();
+            }
+        }
+
+
+
     }
 
 }

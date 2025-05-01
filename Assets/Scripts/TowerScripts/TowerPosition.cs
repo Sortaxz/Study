@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Towers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +25,8 @@ public class TowerPosition : MonoBehaviour
 
     public void SetTowerSelectionUIActive()
     {
-        print(transform.name);
+        
     }
 
+    
 }

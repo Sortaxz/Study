@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Balance;
 using Enemy;
+using EnemyCoin.Factory;
 using EnemyFactorys;
 using Towers;
 using UnityEngine;
@@ -25,12 +27,17 @@ public class GameManager : MonoBehaviour
     EnemyFactory enemyFactory;
 
     [SerializeField] private Tower[] towers;
-    TowerCreator towerCreator;
+    private TowerCreator towerCreator;
+
+    private BalanceOperations balanceOperations;
+    public BalanceOperations BalanceOperations => balanceOperations;
+    
     void Awake()
     {
         enemyFactory = new EnemyFactory();
         towerCreator =  new TowerCreator();
-    }
+        balanceOperations = new BalanceOperations();
+    }   
 
     void Update()
     {
@@ -57,7 +64,8 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            enemyFactory.EnemyFunctionStop();
+            towerCreator.TowersReset();
+            //enemyFactory.EnemyFunctionStop();
         }
 
         if(Input.GetKeyDown(KeyCode.V))
@@ -76,14 +84,19 @@ public class GameManager : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.G))
         {
+            //EnemyCoinFactory enemyCoinFactory = new EnemyCoinFactory();
+            //enemyCoinFactory.EnemyCoinCreate(EnemyCoin.NameEnum.EnemyCoinNameEnum.EnemCoin_1,100);
+            /*
             foreach (var item in towers)
             {
                 item.TowerFunctionResume();
             }
+            */
         }
 
         if (Input.GetMouseButtonDown(0))
         {
+            
             /*
             Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if(newPos.y < 1 && newPos.y > -3f)
@@ -134,7 +147,11 @@ public class GameManager : MonoBehaviour
         
     }
 
-
+    public void CoinIncrease(int coinIncreaseValue)
+    {
+        print("çalişiyor");
+        balanceOperations.CoinValueIncrease(coinIncreaseValue);
+    }
 
 
 

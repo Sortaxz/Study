@@ -47,29 +47,8 @@ namespace EnemyFactorys
 
         internal void SaveEnemyTypeFindToList(BaseEnemy enemy)
         {
-            switch(enemy.tag)
-            {
-             
-                case "MageEnemy":
-             
-                break;
-             
-                case "MeleeEnemy":
-             
-                break;
-             
-                case "RangeEnemy":
-             
-                break;
-             
-                case "TankEnemy":
-             
-                break;
-
-                case "BossEnemy":
-                break;
-            
-            }
+            if(!baseEnemies.ContainsKey(enemy.name))
+            baseEnemies.Add(enemy.name,enemy);
         }
 
        

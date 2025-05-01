@@ -41,11 +41,47 @@ namespace Towers
             return towers.Values.ToArray();
         }
 
-        public void TowersReset()
+        internal void TowersFunctionPause()
         {
             foreach (var item in towers.Values)
             {
-                GameObject.Destroy(item.gameObject);
+                item.TowerFunctionPause();
+            }
+        }
+
+        internal void TowersFunctionResume()
+        {
+            foreach (var item in towers.Values)
+            {
+                item.TowerFunctionResume();
+            }
+        }
+
+        internal void TowersFunctionStop()
+        {
+            foreach (var item in towers.Values)
+            {
+                item.TowerFunctionStop();
+            }
+        }
+
+        internal void TowersFunctionPlay()
+        {
+            foreach (var item in towers.Values)
+            {
+                item.TowerFunctionStart();
+            }
+        }
+
+        public void TowersReset()
+        {
+            TowersFunctionStop();
+            foreach (var item in towers.Values)
+            {
+                if(item != null)
+                {
+                    //GameObject.Destroy(item.gameObject);
+                }
             }
             towers.Clear();
         }
