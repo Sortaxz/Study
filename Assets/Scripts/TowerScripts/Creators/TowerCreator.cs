@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Towers.DataScriptableObject;
 using UnityEngine;
 
 namespace Towers
@@ -9,6 +10,12 @@ namespace Towers
     {
         private int a = 0;
         private Dictionary<string,Tower> towers = new Dictionary<string,Tower>();
+        private TowerDateScriptableObject towerDateScriptableObject;
+
+        public TowerCreator()
+        {
+            towerDateScriptableObject = Resources.Load<TowerDateScriptableObject>("ScriptableObjects/TowerDataScriptableObject");
+        }
 
         public Tower Create( ITowerFactor towerFactor,TowerName towerName,Vector2 towerPosition)
         {
@@ -24,12 +31,15 @@ namespace Towers
             {
                 case ArcherTowerFactory:
                     ArcherTowerFactory archerTowerFactory = (ArcherTowerFactory)towerFactor;
+                    archerTowerFactory.SetTowerDateScriptableObject(towerDateScriptableObject);
                     return archerTowerFactory.Create(towerName,towerPosition,index);
                 case FireTowerFactory:
                     FireTowerFactory fireTowerFactory = (FireTowerFactory)towerFactor;
+                    fireTowerFactory.SetTowerDateScriptableObject(towerDateScriptableObject);
                     return fireTowerFactory.Create(towerName,towerPosition,index);
                 case IceTowerFactory:
                     IceTowerFactory iceTowerFactory = (IceTowerFactory)towerFactor;
+                    iceTowerFactory.SetTowerDateScriptableObject(towerDateScriptableObject);
                     return iceTowerFactory.Create(towerName,towerPosition,index);
                 default:
                     return null;

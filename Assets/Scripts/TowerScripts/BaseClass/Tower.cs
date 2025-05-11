@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enemy;
 using TowerBulletControl;
 using UnityEngine;
 
@@ -28,26 +29,32 @@ namespace Towers
         [SerializeField] protected Queue<TowerBullet> towerBullets;
         public Queue<TowerBullet> TowerBullets => towerBullets;
 
-        protected string towerName;
+        [SerializeField]protected string towerName;
         public string TowerName => towerName;
 
         [SerializeField] protected float towerHealt;
         public float TowerHealt => towerHealt;
 
-        protected float maxTowerHealt;
+        [SerializeField]protected float maxTowerHealt;
         public float MaxTowerHealt => maxTowerHealt;
+        
+        [SerializeField]protected int towerLevel;
+        public int TowerLevel {get { return towerLevel;} set { towerLevel = value;}}
 
+        [SerializeField]protected float towerShield;
+        public float TowerShield {get { return towerShield; } set { towerShield = value; } }
+
+
+        [SerializeField]protected float towerDamage;
+        public float TowerDamage { get { return towerDamage;} set { towerDamage = value;} }
         
-        protected int towerDamage;
-        public int TowerDamage { get { return towerDamage;} set { towerDamage = value;} }
-        
-        protected int towerAttackSpeed;
+        [SerializeField]protected int towerAttackSpeed;
         public int TowerAttackSpeed { get { return towerAttackSpeed;} set { towerAttackSpeed = value;}}
         
-        protected int towerRange;
+        [SerializeField]protected int towerRange;
         public int TowerRange { get { return towerRange;} set { towerRange = value;}}
         
-        protected int towerCost;
+        [SerializeField]protected int towerCost;
         public int TowerCost { get { return towerCost;} set { towerCost = value;} }
 
 
@@ -65,35 +72,40 @@ namespace Towers
             transform.name = name;
         }
 
+        public virtual void SetTowerHealt(float _towerHealt)
+        {
+            towerHealt = _towerHealt;
+            towerUIController.SetHealtBarValue(towerHealt);
+        }
 
-         #region  Kule'nin canini ayarlayabileceğin methodlar ve propert'ler
+        #region  Kule'nin canini ayarlayabileceğin methodlar ve propert'ler
 
-            public virtual void IncreaseTowerHealt(float value)
+        public virtual void IncreaseTowerHealt(float value)
+        {
+            if (towerHealt < maxTowerHealt)
             {
-                if(towerHealt < maxTowerHealt)
-                {
-                    towerHealt += value;
-                }
-                else
-                {
-                    towerHealt = maxTowerHealt;
-                }
-                towerUIController.HealtBarValueIncrease(towerHealt);
+                towerHealt += value;
             }
-
-            public virtual void ReductionTowerHealt(float value)
+            else
             {
-                if(towerHealt > 0)
-                {
-                    towerHealt -= value;
-                }
-                else if(towerHealt <= 0)
-                {
-                    towerHealt = 0;
-                    Destroy(gameObject);
-                }
-                towerUIController.HealtBarValueIncrease(towerHealt);
+                towerHealt = maxTowerHealt;
             }
+            towerUIController.HealtBarValueIncrease(towerHealt);
+        }
+
+        public virtual void ReductionTowerHealt(float value)
+        {
+            if (towerHealt > 0)
+            {
+                towerHealt -= value;
+            }
+            else if (towerHealt <= 0)
+            {
+                towerHealt = 0;
+                Destroy(gameObject);
+            }
+            towerUIController.HealtBarValueIncrease(towerHealt);
+        }
 
         #endregion
 
@@ -103,20 +115,63 @@ namespace Towers
             transform.position = newPos;
         }
 
-        public abstract void SetTowerAttackType(TowerAttackType towerAttackType);
-        public abstract void SetTowerDamage(int damage);
-        public abstract void SetTowerAttackSpeed(int attackSpeed);
-        public abstract void SetTowerRange(int range);
-        public abstract void SetTowerTargetPriority(GameObject targetPriority);
-        public abstract void SetTowerCost(int cost);
+        public virtual void SetTowerLevel(int _towerLevel)
+        {
+            towerLevel = _towerLevel;
+        }
 
+        public virtual void SetTowerAttackType(TowerAttackType _towerAttackType)
+        {
+            towerAttackType = _towerAttackType;
+        }
+
+        public virtual void SetTowerDamage(float _damage)
+        {
+            towerDamage = _damage;
+        }
+        
+        public virtual void SetTowerAttackSpeed(int _attackSpeed)
+        {
+            towerAttackSpeed = _attackSpeed;
+        }
+        
+        public virtual void SetTowerRange(int _range)
+        {
+            towerRange = _range;
+        }
+
+        public virtual void SetTowerCost(int _cost)
+        {
+            towerCost = _cost;
+        }
+
+        public virtual void SetTowerTargetPriority(GameObject targetPriority)
+        {
+            if(towerTargetPriority !=  targetPriority  && targetPriority.GetComponent<BaseEnemy>() != null)
+            {
+                towerTargetPriority = targetPriority;
+
+            }
+        }
+
+        public virtual void SetTowerProperty(Vector3 pos,TowerAttackType towerAttackType,float healt,int level,float _damage,int _attackSpeed,int _range,int _cost)
+        {
+            SetTowerHealt(healt);
+            SetTowerPosition(pos);
+            SetTowerAttackType(towerAttackType);
+            SetTowerDamage(_damage);
+            SetTowerAttackSpeed(_attackSpeed);
+            SetTowerRange(_range);
+            SetTowerCost(_cost);
+            SetTowerLevel(level);
+        }
         
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
-            SetTowerTargetPriority(collision.gameObject);
-            
-            StandartFire(collision.gameObject);
+            if(ControlCollisionGameobjectTag(collision.gameObject))
+            {
+                SetTowerTargetPriority(collision.gameObject);
+            }
         }
 
 
@@ -124,41 +179,73 @@ namespace Towers
         {
             if(towerTargetPriority == null)
             {
-                if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
-                SetTowerTargetPriority(collision.gameObject);
+                if(ControlCollisionGameobjectTag(collision.gameObject))
+                {
+                    SetTowerTargetPriority(collision.gameObject);
+                }
             }
-
+            
         }
 
         void OnTriggerExit2D(Collider2D collision)
         {
-            if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
+            if(towerTargetPriority != null)
+            towerTargetPriority = null;
+        }
+
+        public bool ControlCollisionGameobjectTag(GameObject collision)
+        {
+            if(collision.CompareTag("BossEnemy"))
             {
-                towerTargetPriority = null;
+                return true;
+            }
+            else if(collision.CompareTag("MageEnemy"))
+            {
+                return true;
+            }
+            else if(collision.CompareTag("MeleeEnemy"))
+            {
+                return true;
+            }
+            else if(collision.CompareTag("RangeEnemy"))
+            {
+                return true;
+            }
+            else if(collision.CompareTag("TankEnemy"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
+
+
 
         
         internal virtual void StandartFire(GameObject collision)
         {
-            if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
-                StartCoroutine(ArcherTowerStandartFire(collision));
+            StartCoroutine(ArcherTowerStandartFire());
         }
 
-        internal virtual IEnumerator ArcherTowerStandartFire(GameObject collision)
+        internal virtual IEnumerator ArcherTowerStandartFire()
         {
-            if(towerTargetPriority != null)
-            {
-                while(!isStop)
-                {
-                    if(!isPause)
-                    {
-                        if(collision.gameObject.name != transform.name && collision.gameObject.tag != "TowerBullet")
-                        towerBullet.Add(towerBulletController.GetFromTowerBulletList(collision.gameObject));
-                    }
-                    yield return new WaitForSeconds(3);  
-                }
 
+            TowerBullet towerBullet = null;
+            while (!isStop)
+            {
+                if (!isPause)
+                {
+                    if (towerTargetPriority != null)
+                    {
+                        towerBullet = towerBulletController.GetFromTowerBulletList(towerBullets, towerTargetPriority.gameObject,towerDamage);
+
+                    }
+                }
+                yield return new WaitForSeconds(3);
+                if (towerBullet != null)
+                    towerBulletController.ReturToTowerBulletList(towerBullets, towerBullet, transform.position);
             }
         }
 

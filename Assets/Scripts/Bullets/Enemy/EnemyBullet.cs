@@ -52,11 +52,13 @@ namespace Enemy.Bullet
                 case "FireTower":
                     enemyBulletCollisionFireTower = collisionGameObject.GetComponent<FireTower>();
                     gameObject.SetActive(false);
+                    enemyBulletCollisionFireTower.ReductionTowerHealt(bulletDamage);
                 break;
                 
                 case "IceTower":
                     enemyBulletCollisionIceTower = collisionGameObject.GetComponent<IceTower>();
                     gameObject.SetActive(false);
+                    enemyBulletCollisionIceTower.ReductionTowerHealt(bulletDamage);
                 break;
                 
                 case "MainTower":
@@ -88,9 +90,7 @@ namespace Enemy.Bullet
             }
         }
 
-        void FixedUpdate()
-        {
-        }
+        
 
 
     }

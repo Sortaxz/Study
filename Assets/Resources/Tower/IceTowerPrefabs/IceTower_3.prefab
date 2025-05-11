@@ -29,6 +29,16 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2879728849782606752, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+        type: 3}
+      propertyPath: m_Name
+      value: IceTower_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879728849782606752, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+        type: 3}
+      propertyPath: m_TagString
+      value: IceTower
+      objectReference: {fileID: 0}
     - target: {fileID: 4137971840302936864, guid: b34fe9ee7727b7e43951a3f6b652ff70,
         type: 3}
       propertyPath: m_Name
@@ -38,6 +48,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: IceTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482226570430360492, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482226570430360492, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 5.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482226570430360492, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77e2b8c40e848f047b1b726dff374253,
+        type: 3}
+    - target: {fileID: 5482226570430360492, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6007859198853922511, guid: b34fe9ee7727b7e43951a3f6b652ff70,
         type: 3}
@@ -89,32 +120,102 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3498033878397142293, guid: b34fe9ee7727b7e43951a3f6b652ff70, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4137971840302936864, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+    - targetCorrespondingSourceObject: {fileID: 2879728849782606752, guid: b34fe9ee7727b7e43951a3f6b652ff70,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3144100642968875437}
-    - targetCorrespondingSourceObject: {fileID: 4137971840302936864, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+      addedObject: {fileID: 7641312548873973792}
+    - targetCorrespondingSourceObject: {fileID: 2879728849782606752, guid: b34fe9ee7727b7e43951a3f6b652ff70,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2851901785334370607}
+      addedObject: {fileID: 2707204483362220720}
+    - targetCorrespondingSourceObject: {fileID: 2879728849782606752, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4460600486723713608}
   m_SourcePrefab: {fileID: 100100000, guid: b34fe9ee7727b7e43951a3f6b652ff70, type: 3}
---- !u!1 &6011003174417813224 stripped
+--- !u!1 &5616132622129608296 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 4137971840302936864, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+  m_CorrespondingSourceObject: {fileID: 2879728849782606752, guid: b34fe9ee7727b7e43951a3f6b652ff70,
     type: 3}
   m_PrefabInstance: {fileID: 7639891661081296328}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &3144100642968875437
+--- !u!114 &7641312548873973792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5616132622129608296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46069aa615536704faa5b33fcd68f6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerTargetPriority: {fileID: 0}
+  towerUIController: {fileID: 0}
+  towerBullet: []
+  towerBulletPrefab: {fileID: 0}
+  towerBulletsParent: {fileID: 0}
+  towerHealt: 20
+  isStop: 0
+  isPause: 0
+--- !u!61 &2707204483362220720
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6011003174417813224}
+  m_GameObject: {fileID: 5616132622129608296}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.75, y: 5.94}
+    newSize: {x: 3.25, y: 5.44}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.75, y: 5.94}
+  m_EdgeRadius: 0
+--- !u!61 &-4460600486723713608
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5616132622129608296}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -140,28 +241,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1.11}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.83, y: 9.59}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 2.75, y: 5.94}
+    newSize: {x: 3.25, y: 5.44}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.83, y: 9.59}
+  m_Size: {x: 11, y: 8}
   m_EdgeRadius: 0
---- !u!114 &2851901785334370607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6011003174417813224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46069aa615536704faa5b33fcd68f6a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

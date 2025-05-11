@@ -58,8 +58,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            CreateTower();
-
+            CreateFireTower(Vector2.zero);
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
@@ -111,25 +110,29 @@ public class GameManager : MonoBehaviour
 
 
 
-    private void CreateTower()
+    
+
+
+    public void CreateArcherTower(Vector2 pos)
     {
 
-        ArcherTower archerTower = towerCreator.Create(new ArcherTowerFactory(), TowerName.ArcherTower_1, Vector2.zero) as ArcherTower;
-        
-        
-    }
-
-    public void A()
-    {
-        towers = towerCreator.GetTowerList();
-    }
-
-    private void CreateTower(Vector2 pos)
-    {
-
-        ArcherTower archerTower = (ArcherTower)towerCreator.Create(new ArcherTowerFactory(), TowerName.ArcherTower_1, Vector2.zero);
-        archerTower.SetTowerPosition(new Vector3(pos.x, pos.y, -1));
+        ArcherTower archerTower = (ArcherTower)towerCreator.Create(new ArcherTowerFactory(), TowerName.ArcherTower_1, new Vector3(pos.x, pos.y, -1));
+        //archerTower.SetTowerPosition(new Vector3(pos.x, pos.y, -1));
         archerTower.SetTowerName(archerTower.name);
+    }
+
+    public void CreateFireTower(Vector2 pos)
+    {
+        FireTower fireTower = (FireTower)towerCreator.Create(new FireTowerFactory(), TowerName.FireTower_1, new Vector3(pos.x, pos.y, -1));
+        //fireTower.SetTowerPosition(new Vector3(pos.x, pos.y, -1));
+        fireTower.SetTowerName(fireTower.name);
+    }
+
+    public void CreateIceTower(Vector2 pos)
+    {
+        IceTower iceTower = (IceTower)towerCreator.Create(new IceTowerFactory(), TowerName.IceTower_1, new Vector3(pos.x, pos.y, -1));
+        //iceTower.SetTowerPosition(new Vector3(pos.x, pos.y, -1));
+        iceTower.SetTowerName(iceTower.name);
     }
 
 
@@ -149,7 +152,6 @@ public class GameManager : MonoBehaviour
 
     public void CoinIncrease(int coinIncreaseValue)
     {
-        print("çalişiyor");
         balanceOperations.CoinValueIncrease(coinIncreaseValue);
     }
 

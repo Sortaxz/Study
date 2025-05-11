@@ -16,6 +16,8 @@ TagManager:
   - RangeEnemy
   - TankEnemy
   - TowerRange
+  - TowerElectionParent
+  - TowerPosition
   layers:
   - Default
   - TransparentFX

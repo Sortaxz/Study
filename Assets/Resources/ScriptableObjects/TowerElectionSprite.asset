@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98b476b60e205744950954afd211184, type: 3}
+  m_Name: TowerElectionSprite
+  m_EditorClassIdentifier: 
+  towerElectionSprites:
+  - towerElectionSprite:
+    - {fileID: 21300000, guid: c09b8056edd9b7042a96ce5f343c8c86, type: 3}
+    - {fileID: 21300000, guid: 93ea3630e596f0e419ade95ccb9c2fd4, type: 3}
+    - {fileID: 21300000, guid: f71d2a122af26494d88ad38231c57978, type: 3}
+  - towerElectionSprite:
+    - {fileID: 21300000, guid: 23e6ddb37b7ddeb41ba08b1d58f5c361, type: 3}
+    - {fileID: 21300000, guid: 80ad2198874c383419618bb8ea5afe17, type: 3}
+    - {fileID: 21300000, guid: 9cc4a20963e075b429d90855a47148f2, type: 3}
+  - towerElectionSprite:
+    - {fileID: 21300000, guid: 54e1e2c1c5a9cd4458ee15a6a0ac065b, type: 3}
+    - {fileID: 21300000, guid: 2d68b5a1520c469478e7cbf88318a483, type: 3}
+    - {fileID: 21300000, guid: 77e2b8c40e848f047b1b726dff374253, type: 3}
+  - towerElectionSprite:
+    - {fileID: 21300000, guid: b31897c0eb71e294c847585073dc7e79, type: 3}
+    - {fileID: 21300000, guid: 3be657a29ff63da4d8245bac774d39e7, type: 3}
+    - {fileID: 21300000, guid: 908ec27f20a7ddd498e46e019653456f, type: 3}

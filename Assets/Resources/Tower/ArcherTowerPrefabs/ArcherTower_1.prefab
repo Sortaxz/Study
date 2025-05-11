@@ -88,7 +88,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healtBar
       value: 
-      objectReference: {fileID: 4999323119594681313}
+      objectReference: {fileID: 1420451529121771884}
     - target: {fileID: 5377152747454742118, guid: b34fe9ee7727b7e43951a3f6b652ff70,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -173,10 +173,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7864743337354214810}
+    - targetCorrespondingSourceObject: {fileID: 2879728849782606752, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2690977889300264911}
   m_SourcePrefab: {fileID: 100100000, guid: b34fe9ee7727b7e43951a3f6b652ff70, type: 3}
---- !u!114 &4999323119594681313 stripped
+--- !u!114 &1420451529121771884 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1740896511766763594, guid: b34fe9ee7727b7e43951a3f6b652ff70,
+  m_CorrespondingSourceObject: {fileID: 5692467359721396935, guid: b34fe9ee7727b7e43951a3f6b652ff70,
     type: 3}
   m_PrefabInstance: {fileID: 6722116968973183915}
   m_PrefabAsset: {fileID: 0}
@@ -282,3 +286,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11, y: 8}
   m_EdgeRadius: 0
+--- !u!114 &2690977889300264911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844818864596918283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66576d65b149c5b4488c22e16d3b2cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerTargetPriority: {fileID: 0}
+  towerUIController: {fileID: 0}
+  towerBullet: []
+  towerBulletPrefab: {fileID: 0}
+  towerBulletsParent: {fileID: 0}
+  towerHealt: 20
+  isStop: 0
+  isPause: 0

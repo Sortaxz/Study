@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TowerElection;
+using Towers.Position;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -36,10 +38,23 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region  Balance
-    BalanceOperationsUIControl balanceOperationsUIControl;
+    private BalanceOperationsUIControl balanceOperationsUIControl;
+    public BalanceOperationsUIControl BalanceOperationsUIControl => balanceOperationsUIControl;
     [SerializeField] private TextMeshProUGUI balanceTextMeshProGUI;
     
 
+    #endregion
+
+    #region  EnemyCoin
+    [SerializeField] private Transform coinTargetPosition;
+    public Transform EnemyCoinTargetPosition => coinTargetPosition;
+
+    #endregion
+
+    #region  TowerElectionCard
+
+    private TowerElectionCardController towerElectionCardController;    
+    public TowerElectionCardController TowerElectionCardController => towerElectionCardController;
     #endregion
 
     void Awake()
@@ -56,6 +71,9 @@ public class UIManager : MonoBehaviour
         }
         
         balanceOperationsUIControl = new BalanceOperationsUIControl(GameManager.Instance.BalanceOperations,balanceTextMeshProGUI);
+        if(towerElectionCardController == null) towerElectionCardController = new TowerElectionCardController();
+
+        
     }
 
     void Update()

@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TowerData.Archer;
+using Towers.DataScriptableObject;
 using UnityEngine;
 
 namespace Towers
 {
     public class ArcherTowerFactory : IArcherTowerFactory
     {
+        private TowerDateScriptableObject towerDateScriptableObject;
+
+        public void SetTowerDateScriptableObject(TowerDateScriptableObject _towerDateScriptableObject)  
+        {
+            towerDateScriptableObject = _towerDateScriptableObject;
+        }
+        
         public Tower Create(TowerName towerName,Vector3 towerPosition,int index)
         {
            
@@ -17,10 +26,28 @@ namespace Towers
             {
                 tower = GameObject.Instantiate(prefab);
                 tower.name = tower.name.Replace("_1(Clone)",$"_ {index}");
-
+                ArcherTower archerTower = tower.GetComponent<ArcherTower>();
+                A(archerTower,tower.GetComponent<SpriteRenderer>().sprite,towerPosition);
             }
 
             return tower.GetComponent<ArcherTower>();
+
+        }
+
+
+        public void A(ArcherTower archerTower,Sprite sprite,Vector3 pos)
+        {
+            int index = 0;
+            for (int i = 0; i < towerDateScriptableObject.ArcherTower.Length; i++)
+            {
+                if(towerDateScriptableObject.ArcherTower[i].archerTowerName == sprite.name) 
+                {
+                    index = i;
+                    break;
+                }
+            }
+            ArcherTowerData archerTowerData = towerDateScriptableObject.ArcherTower[index];
+            archerTower.SetTowerProperty(pos,TowerAttackType.Single,archerTowerData.archerTowerHealt,archerTowerData.archerTowerLevel,archerTowerData.archerTowerDamage,archerTowerData.towerAttackSpeed,archerTowerData.towerRange,archerTowerData.towerCost);
 
         }
     }

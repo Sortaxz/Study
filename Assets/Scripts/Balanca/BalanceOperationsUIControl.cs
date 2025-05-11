@@ -19,5 +19,6 @@ public class BalanceOperationsUIControl
     {
         int coin = balanceOperations.CoinValueIncrease(value);
         balanceTextMeshProGUI.text = coin.ToString();
+        
     }
 }

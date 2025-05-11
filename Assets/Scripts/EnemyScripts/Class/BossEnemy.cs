@@ -52,6 +52,11 @@ namespace Enemy
             {
                 EnemyDestroy();
             }
+
+            if(isDead)
+            {
+                EnemyDestroy();
+            }
         }
 
 

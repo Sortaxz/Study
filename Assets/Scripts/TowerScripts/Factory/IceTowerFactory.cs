@@ -1,22 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
+using TowerData.Ice;
+using Towers.DataScriptableObject;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Towers
 {
     public class IceTowerFactory : IIceTowerFactory
     {
+        private TowerDateScriptableObject towerDateScriptableObject;
+
+        public void SetTowerDateScriptableObject(TowerDateScriptableObject _towerDateScriptableObject)  
+        {
+            towerDateScriptableObject = _towerDateScriptableObject;
+        }
+        
+        
         public Tower Create(TowerName towerName,Vector3 towerPosition,int index)
         {
             GameObject prefab = Resources.Load<GameObject>($"Tower/IceTowerPrefabs/{towerName}");
-            GameObject iceTower = null;
+            GameObject iceTowerGameObject = null;
             if(prefab != null)
             {
-                iceTower = GameObject.Instantiate(prefab);
-                iceTower.name = iceTower.name.Replace("_1(Clone)",$"_ {index}");
+                iceTowerGameObject = GameObject.Instantiate(prefab);
+                iceTowerGameObject.name = iceTowerGameObject.name.Replace("_1(Clone)",$"_ {index}");
+                IceTower iceTower=   iceTowerGameObject.GetComponent<IceTower>();
+                A(iceTower,iceTower.GetComponent<SpriteRenderer>().sprite,towerPosition);
             }
 
-            return iceTower.GetComponent<Tower>();
+            return iceTowerGameObject.GetComponent<Tower>();
+        }
+
+        public void A(IceTower iceTower,Sprite sprite,Vector3 pos)
+        {
+            int index = 0;
+            for (int i = 0; i < towerDateScriptableObject.ArcherTower.Length; i++)
+            {
+                if(towerDateScriptableObject.ArcherTower[i].archerTowerName == sprite.name) 
+                {
+                    index = i;
+                    break;
+                }
+            }
+            IceTowerData iceTowerData = towerDateScriptableObject.IceTowerDatas[index];
+            iceTower.SetTowerProperty(pos,TowerAttackType.Single,iceTowerData.iceTowerhealt,iceTowerData.iceTowerLevel,iceTowerData.iceTowerDamage,iceTowerData.iceTowerAttackSpeed,iceTowerData.iceTowerRange,iceTowerData.iceTowerCost);
+
         }
     }
 

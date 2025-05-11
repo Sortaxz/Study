@@ -53,8 +53,7 @@ public class TimeControl : MonoBehaviour
                         seconds = 0f;
                         time++;
                     }
-                    
-                    string formattedTime = $"{Mathf.FloorToInt(time)}:{Mathf.FloorToInt(seconds)}";
+                    string formattedTime = string.Format("{0:00}:{1:00}", time, (int)seconds);
                     textMeshProUGUI.text = formattedTime;
                 }
                 else

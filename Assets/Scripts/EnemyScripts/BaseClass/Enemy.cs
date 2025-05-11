@@ -68,6 +68,8 @@ namespace Enemy
 
         [SerializeField] protected int botyGold; 
 
+        [SerializeField] protected bool isDead;
+        
 
         [SerializeField] protected bool isFire;
         public bool IsFire => isFire;
@@ -80,7 +82,10 @@ namespace Enemy
 
         void Awake()
         {
+            
         }
+
+        
 
         public void SetEnemyName(string name,int index)
         {
@@ -330,7 +335,7 @@ namespace Enemy
         
         public virtual void EnemyDestroy()
         {
-            enemyCoinFactory.EnemyCoinCreate(EnemyCoin.NameEnum.EnemyCoinNameEnum.EnemCoin_1,botyGold);
+            enemyCoinFactory.EnemyCoinCreate(EnemyCoin.NameEnum.EnemyCoinNameEnum.EnemCoin_1,transform.position,botyGold);
             gameObject.SetActive(false);
 
         }

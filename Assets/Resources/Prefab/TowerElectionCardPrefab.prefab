@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6240652343034690710}
   - component: {fileID: 7057982223438869522}
   - component: {fileID: 8578893180188816799}
-  - component: {fileID: 6346367218692567998}
   - component: {fileID: 4505088569765488858}
+  - component: {fileID: 8517403715197299708}
   m_Layer: 5
   m_Name: TowerElectionCardPrefab
   m_TagString: Untagged
@@ -77,18 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6346367218692567998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4382154216481314086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a8003d3a25174243af09815f35b9c73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4505088569765488858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,3 +121,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8517403715197299708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382154216481314086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e989cf9ef394d3348ba45c659fec9a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

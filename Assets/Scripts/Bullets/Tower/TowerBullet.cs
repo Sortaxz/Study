@@ -1,45 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using TowerBulletControl;
 using UnityEngine;
 
 public class TowerBullet : BaseTowerBullet
 {
-    private static GameObject towerBullet;
 
-    Rigidbody2D Rigidbody2D;
+    private bool isStop = false;
+    private bool isPause = false;
+
+    void Awake()
+    {
+        towerBulletRb2D = GetComponent<Rigidbody2D>();
+    }
+
+    void OnEnable()
+    {
+        if(towerBulletTarget != null)
+        StartCoroutine(MovementToTarget(towerBulletTarget.transform,3));
+    }
 
     void Start()
     {
-        towerBullet = gameObject;
-        Rigidbody2D = GetComponent<Rigidbody2D>();
         StartCoroutine(MovementToTarget(towerBulletTarget.transform,3));
     }
+
+    public override IEnumerator MovementToTarget(Transform target, float time)
+    {
+        while(!isStop)
+        {
+            if(!isPause)
+            {
+                float distance = Vector3.Distance(transform.position,towerBulletTarget.transform.position);
+                if(distance > .5f)
+                {
+                    transform.position = Vector3.Lerp(transform.position,towerBulletTarget.transform.position,Time.deltaTime * 2f);
+                }
+                else
+                {
+                    isStop = true;
+                }
+                yield return null;
+            }
+        }
+    }
+
+    public override void SetTowerBulletParent(Transform parent)
+    {
+    }
+
     
-
-    public override void SetTowerBulletParent(Transform parent,TowerBulletDestroy _towerBulletDestroy)
-    {
-        transform.SetParent(parent);
-    }
-
-    public override IEnumerator MovementToTarget(Transform target,float liveTime)
-    {
-        if(target != null)
-        {
-            Rigidbody2D.AddForce(towerBulletTarget.transform.position * 20);
-            yield return new WaitForSeconds(liveTime);
-            towerBulletDestroy();
-        }
-        else
-        {
-            StopCoroutine(MovementToTarget(transform,liveTime));
-        }
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            towerBulletDestroy();
-        }
-    }
 }
