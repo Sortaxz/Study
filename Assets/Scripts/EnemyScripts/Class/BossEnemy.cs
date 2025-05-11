@@ -28,7 +28,7 @@ namespace Enemy
             
             if(transform.GetChild(0).childCount < 1)
             {
-                _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.CreateEnemyBullets(transform.GetChild(0).transform,1));
+                _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.CreateEnemyBullets(transform.GetChild(0).transform,3));
             }
             else if(transform.GetChild(0).childCount >= 1)
             {

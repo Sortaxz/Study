@@ -9,6 +9,7 @@ namespace TowerData.Archer
     public class ArcherTowerData 
     {
         public string archerTowerName;
+        public Sprite archerTowerSprite;
         public float archerTowerHealt;
         public float archerTowerShield;
         public float archerTowerDamage;

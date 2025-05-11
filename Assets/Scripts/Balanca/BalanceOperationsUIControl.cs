@@ -15,10 +15,16 @@ public class BalanceOperationsUIControl
         balanceTextMeshProGUI = textMeshProUGUI;
     }
 
-    public void SetCoinText(int value)
+    public void SetCoinIncraseText(int value)
     {
         int coin = balanceOperations.CoinValueIncrease(value);
         balanceTextMeshProGUI.text = coin.ToString();
         
+    }
+
+    public void SetCoinValueReductionText(int value)
+    {
+        int coin = balanceOperations.CoinValueReduction(value);
+        balanceTextMeshProGUI.text = coin.ToString();
     }
 }

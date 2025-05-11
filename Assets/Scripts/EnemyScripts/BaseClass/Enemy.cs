@@ -377,10 +377,11 @@ namespace Enemy
 
         [SerializeField] private GameObject collisionTarget;
 
-       
+        
 
         void OnCollisionStay2D(Collision2D collision)
         {
+            print(collision.gameObject.name);
             TargetTowerTypeFind(collision.collider.gameObject,true);
         }
 

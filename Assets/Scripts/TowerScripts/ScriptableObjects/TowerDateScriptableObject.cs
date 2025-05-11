@@ -12,10 +12,10 @@ namespace Towers.DataScriptableObject
     {
         
         [SerializeField] private ArcherTowerData[] archerTowerDatas;
-        public ArcherTowerData[] ArcherTower => archerTowerDatas;
+        public ArcherTowerData[] ArcherTowerDatas => archerTowerDatas;
         
         [SerializeField] private FireTowerData[] fireTowerDatas;
-        public FireTowerData[] FireTower => fireTowerDatas;
+        public FireTowerData[] FireTowerDatas => fireTowerDatas;
 
         [SerializeField] private IceTowerData[] iceTowerDatas;
         public IceTowerData[] IceTowerDatas => iceTowerDatas;

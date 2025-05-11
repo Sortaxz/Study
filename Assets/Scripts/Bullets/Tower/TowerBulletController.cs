@@ -12,9 +12,9 @@ namespace TowerBulletControl
     {
         
 
-        public Queue<TowerBullet> CreateTowerBullet(Transform bulletParent,Vector3 bulletPosition,TowerBulletTypeEnum towerBulletType,TowerBulletNameEnum towerBulletName,int bulletCount)
+        public Queue<BaseTowerBullet> CreateTowerBullet(Transform bulletParent,Vector3 bulletPosition,TowerBulletTypeEnum towerBulletType,TowerBulletNameEnum towerBulletName,int bulletCount)
         {
-            Queue<TowerBullet> towerBullets = new Queue<TowerBullet>();
+            Queue<BaseTowerBullet> towerBullets = new Queue<BaseTowerBullet>();
             for (int i = 0; i < bulletCount; i++)
             {
                 BaseTowerBullet prefab = Resources.Load<TowerBullet>(FindTowerBulletName(towerBulletType,towerBulletName));
@@ -82,14 +82,14 @@ namespace TowerBulletControl
 
         }
 
-        public TowerBullet GetFromTowerBulletList(Queue<TowerBullet> _towerBullets,GameObject target,float towerDamage)
+        public BaseTowerBullet GetFromTowerBulletList(Queue<BaseTowerBullet> _towerBullets,GameObject target,float towerDamage)
         {
-            TowerBullet towerBullet = _towerBullets.Dequeue();
+            BaseTowerBullet towerBullet = _towerBullets.Dequeue();
             towerBullet.SetTowerBulletTarget(target,towerDamage);
             return towerBullet;
         }
 
-        public void ReturToTowerBulletList(Queue<TowerBullet> _towerBullets,TowerBullet towerBullet,Vector3 pos)
+        public void ReturToTowerBulletList(Queue<BaseTowerBullet> _towerBullets,BaseTowerBullet towerBullet,Vector3 pos)
         {
             towerBullet.transform.position = pos;
             towerBullet.RemoveTowerBulletTarget();
@@ -97,6 +97,7 @@ namespace TowerBulletControl
         }
 
        
+
     }
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemy;
 using TowerBulletControl;
+using Towers.UpgradeControl;
 using UnityEngine;
 
 namespace Towers
@@ -26,8 +27,11 @@ namespace Towers
         [SerializeField] protected Transform towerBulletsParent;
         public Transform TowerBulletsParent => towerBulletsParent;
 
-        [SerializeField] protected Queue<TowerBullet> towerBullets;
-        public Queue<TowerBullet> TowerBullets => towerBullets;
+        [SerializeField] protected Queue<BaseTowerBullet> towerBullets;
+        public Queue<BaseTowerBullet> TowerBullets => towerBullets;
+
+        protected TowerUpgrade towerUpgrade;
+        public TowerUpgrade TowerUpgrade => towerUpgrade;
 
         [SerializeField]protected string towerName;
         public string TowerName => towerName;
@@ -61,6 +65,8 @@ namespace Towers
         [SerializeField] protected bool isStop = false;
         
         [SerializeField] protected bool isPause = false;
+
+
 
         public virtual void SetTowerName(string name)
         {
@@ -232,7 +238,7 @@ namespace Towers
         internal virtual IEnumerator ArcherTowerStandartFire()
         {
 
-            TowerBullet towerBullet = null;
+            BaseTowerBullet towerBullet = null;
             while (!isStop)
             {
                 if (!isPause)

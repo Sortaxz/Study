@@ -38,15 +38,15 @@ namespace Towers
         public void A(ArcherTower archerTower,Sprite sprite,Vector3 pos)
         {
             int index = 0;
-            for (int i = 0; i < towerDateScriptableObject.ArcherTower.Length; i++)
+            for (int i = 0; i < towerDateScriptableObject.ArcherTowerDatas.Length; i++)
             {
-                if(towerDateScriptableObject.ArcherTower[i].archerTowerName == sprite.name) 
+                if(towerDateScriptableObject.ArcherTowerDatas[i].archerTowerName == sprite.name) 
                 {
                     index = i;
                     break;
                 }
             }
-            ArcherTowerData archerTowerData = towerDateScriptableObject.ArcherTower[index];
+            ArcherTowerData archerTowerData = towerDateScriptableObject.ArcherTowerDatas[index];
             archerTower.SetTowerProperty(pos,TowerAttackType.Single,archerTowerData.archerTowerHealt,archerTowerData.archerTowerLevel,archerTowerData.archerTowerDamage,archerTowerData.towerAttackSpeed,archerTowerData.towerRange,archerTowerData.towerCost);
 
         }

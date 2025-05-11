@@ -35,9 +35,9 @@ namespace Towers
         public void A(IceTower iceTower,Sprite sprite,Vector3 pos)
         {
             int index = 0;
-            for (int i = 0; i < towerDateScriptableObject.ArcherTower.Length; i++)
+            for (int i = 0; i < towerDateScriptableObject.IceTowerDatas.Length; i++)
             {
-                if(towerDateScriptableObject.ArcherTower[i].archerTowerName == sprite.name) 
+                if(towerDateScriptableObject.IceTowerDatas[i].iceTowerName == sprite.name) 
                 {
                     index = i;
                     break;

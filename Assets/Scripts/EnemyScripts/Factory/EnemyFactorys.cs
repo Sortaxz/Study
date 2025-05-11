@@ -47,8 +47,8 @@ namespace EnemyFactorys
 
         internal void SaveEnemyTypeFindToList(BaseEnemy enemy)
         {
-            if(!baseEnemies.ContainsKey(enemy.name))
-            baseEnemies.Add(enemy.name,enemy);
+            if (!baseEnemies.ContainsKey(enemy.name))
+                baseEnemies.Add(enemy.name, enemy);
         }
 
        

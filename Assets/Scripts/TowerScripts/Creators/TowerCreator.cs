@@ -90,11 +90,22 @@ namespace Towers
             {
                 if(item != null)
                 {
-                    //GameObject.Destroy(item.gameObject);
+                    GameObject.Destroy(item.gameObject);
                 }
             }
             towers.Clear();
         }
+
+        public Tower GetTowerObjectFromTowerList(string towerName)
+        {
+            if(towers.TryGetValue(towerName, out Tower tower))
+            {
+                return tower; 
+            }
+            return null;
+        }
+
+       
 
     }
 

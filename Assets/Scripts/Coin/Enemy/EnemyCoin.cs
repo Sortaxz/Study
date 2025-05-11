@@ -24,12 +24,23 @@ namespace EnemyCoin
         // Update is called once per frame
         void Update()
         {
-
+           
         }
+
         void OnMouseDown()
         {
-            UIManager.Instance.BalanceOperationsUIControl.SetCoinText(amount);
-            StartCoroutine(Movement(new Vector3(10.44f,5.04f)));
+            // Coin sayısını artır
+            GameManager.Instance.CoinIncrease(amount);
+
+            // UI hedef pozisyonunu ekran pozisyonuna çevir
+            Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(null, UIManager.Instance.EnemyCoinTargetPosition.transform.position);
+
+            // Ekran pozisyonunu world pozisyonuna çevir
+            Vector3 worldTargetPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, Camera.main.nearClipPlane + 5f));
+            worldTargetPos.z = 0; // z eksenini sabitliyoruz (2D için)
+
+            // Hareket başlat
+            StartCoroutine(Movement(worldTargetPos));
         }
 
         public void SetAmount(int amount)
@@ -50,20 +61,15 @@ namespace EnemyCoin
 
         private IEnumerator Movement(Vector3 targetPos)
         {
-            float distance = 0;
-            while(!isStop)
+            while (Vector2.Distance(transform.position, targetPos) > 0.1f)
             {
-                distance = Vector2.Distance(transform.position,targetPos);
-                if(distance <.5f)
-                {
-                    break;
-                }
-                transform.position = Vector3.Lerp(transform.position,targetPos,Time.deltaTime * 1f);
+                transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 5f);
                 yield return null;
             }
+
             EnemyCoinDestroy();
         }
-        
+
 
     }
 }

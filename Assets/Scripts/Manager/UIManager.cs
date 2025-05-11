@@ -78,10 +78,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            balanceOperationsUIControl.SetCoinText(20);
-        }
+        
     }
 
 

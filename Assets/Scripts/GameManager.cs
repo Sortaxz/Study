@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private BalanceOperations balanceOperations;
     public BalanceOperations BalanceOperations => balanceOperations;
+
     
     void Awake()
     {
@@ -47,11 +48,8 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-            BossEnemy bossEnemy1 = enemyFactory.Create(EnemyNameEnum.BossEnemy_1, GameUIManager.Instance.EnemyPositions[0].position) as BossEnemy;
-            enemyFactory.SaveEnemyTypeFindToList(bossEnemy1);
-            bossEnemy1.SetEnemyAttack(null, 500, 1000);
-            bossEnemy1.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+            
+            CreateRandomEnemy();
 
         }
 
@@ -74,11 +72,8 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.P))
         {
-            towers = towerCreator.GetTowerList();
-            foreach (var item in towers)
-            {
-                item.TowerFunctionPause();
-            }
+            //towers = towerCreator.GetTowerList();
+            CoinIncrease(100);
         }
         
         if(Input.GetKeyDown(KeyCode.G))
@@ -135,7 +130,83 @@ public class GameManager : MonoBehaviour
         iceTower.SetTowerName(iceTower.name);
     }
 
+    public void CreateRandomEnemy()
+    {
+        int randomCreateIndex = Random.Range(0,4);
+        switch (randomCreateIndex)
+        {
+            
+            case 0:
+                CreateBossEnemy();    
+            break;
 
+            case 1:
+                CreateMageEnemy();
+            break;
+            
+            case 2:
+                CreateMeleeEnemy();
+            break;
+            
+            case 3:
+                CreateRangeEnemy();
+            break;
+            
+            case 4:
+                CreateTankEnemy();
+            break;
+
+            default:
+            break;
+        
+        }
+    }
+
+
+    public void CreateBossEnemy()
+    {
+        int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
+        BossEnemy bossEnemy1 = enemyFactory.Create(EnemyNameEnum.BossEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as BossEnemy;
+        enemyFactory.SaveEnemyTypeFindToList(bossEnemy1);
+        bossEnemy1.SetEnemyAttack(null, 500, 1000);
+        bossEnemy1.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+    }
+
+    public void CreateMageEnemy()
+    {
+        int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
+        MageEnemy mageEnemy = enemyFactory.Create(EnemyNameEnum.MageEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MageEnemy;
+        enemyFactory.SaveEnemyTypeFindToList(mageEnemy);
+        mageEnemy.SetEnemyAttack(null, 500, 1000);
+        mageEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+    }
+
+    public void CreateMeleeEnemy()
+    {
+        int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
+        MeleeEnemy meleeEnemy = enemyFactory.Create(EnemyNameEnum.MeleeEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MeleeEnemy;
+        enemyFactory.SaveEnemyTypeFindToList(meleeEnemy);
+        meleeEnemy.SetEnemyAttack(null, 500, 1000);
+        meleeEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+    }
+
+    public void CreateRangeEnemy()
+    {
+        int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
+        RangeEnemy rangeEnemy = enemyFactory.Create(EnemyNameEnum.RangeEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as RangeEnemy;
+        enemyFactory.SaveEnemyTypeFindToList(rangeEnemy);
+        rangeEnemy.SetEnemyAttack(null, 500, 1000);
+        rangeEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+    }
+
+    public void CreateTankEnemy()
+    {
+        int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
+        TankEnemy tankEnemy = enemyFactory.Create(EnemyNameEnum.TankEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as TankEnemy;
+        enemyFactory.SaveEnemyTypeFindToList(tankEnemy);
+        tankEnemy.SetEnemyAttack(null, 500, 1000);
+        tankEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+    }
 
     public  void GameOver()
     {
@@ -150,9 +221,36 @@ public class GameManager : MonoBehaviour
         
     }
 
+    //Coin artırma methodu
     public void CoinIncrease(int coinIncreaseValue)
     {
-        balanceOperations.CoinValueIncrease(coinIncreaseValue);
+        UIManager.Instance.BalanceOperationsUIControl.SetCoinIncraseText(coinIncreaseValue);
+        TowerObjectsUpgradeStateControl();
+    }
+
+    public void CoinReduction(int coinReductionValue)   
+    {
+        print(coinReductionValue);
+        UIManager.Instance.BalanceOperationsUIControl.SetCoinValueReductionText(coinReductionValue);
+        //TowerObjectsUpgradeStateControl();
+    }
+
+    public void TowerObjectsUpgradeStateControl()
+    {
+        Tower[] towers = towerCreator.GetTowerList();
+        for (int i = 0; i < towers.Length; i++)
+        {
+            bool value = false;
+            if(balanceOperations.GetCoinValue() >= towers[i].TowerCost)
+            {
+                value = true;
+            }
+            else
+            {
+                value = false;
+            }
+            towers[i].TowerUIController.SetTowerUpgradeIconActive(value);
+        }
     }
 
 

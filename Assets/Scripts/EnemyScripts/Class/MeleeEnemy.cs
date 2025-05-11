@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Enemy.Bullet;
+using Enemy.UIController;
+using EnemyCoin.Factory;
 using UnityEngine;
 
 namespace Enemy
@@ -15,27 +17,36 @@ namespace Enemy
 
 
 
-        private void Awake()
+        private void Awake() 
         {
-            if (enemyBulletController == null)
+            if(enemyBulletController == null)
             {
-                enemyBulletController = new EnemyBulletController();
+                enemyBulletController = new EnemyBulletController();    
             }
 
-
-            if (transform.GetChild(0).childCount < 1)
+            if(enemyUIController == null)
             {
-                _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.CreateEnemyBullets(transform.GetChild(0).transform, 1));
+                enemyUIController = GetComponent<EnemyUIController>();   
             }
-            else if (transform.GetChild(0).childCount > 1)
+            
+            if(transform.GetChild(0).childCount < 1)
+            {
+                _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.CreateEnemyBullets(transform.GetChild(0).transform,3));
+            }
+            else if(transform.GetChild(0).childCount >= 1)
             {
                 _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.GetEnemyBulletFromEnemyBulletsList(transform.GetChild(0)));
                 bullets = _enemyBullets.ToList();
-
-
+                
+                
             }
 
-
+            botyGold = Random.Range(0,100);            
+            
+            if(enemyCoinFactory == null)
+            {
+                enemyCoinFactory = new EnemyCoinFactory();
+            }
         }
 
 

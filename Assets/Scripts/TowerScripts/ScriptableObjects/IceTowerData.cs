@@ -9,6 +9,7 @@ namespace TowerData.Ice
     public class IceTowerData 
     {
         public string iceTowerName;
+        public Sprite iceTowerSprite;
         public float iceTowerhealt;
         public float iceTowerShield;
         public float iceTowerDamage;

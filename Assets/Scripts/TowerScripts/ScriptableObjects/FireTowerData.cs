@@ -9,6 +9,7 @@ namespace TowerData.Fire
     public class FireTowerData 
     {
         public string fireTowerName;
+        public Sprite fireTowerSprite;
         public float fireTowerHealt;
         public float fireTowerShield;
         public float fireTowerDamage;

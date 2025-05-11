@@ -34,15 +34,15 @@ namespace Towers
         public void A(FireTower fireTower,Sprite sprite,Vector3 pos)
         {
             int index = 0;
-            for (int i = 0; i < towerDateScriptableObject.ArcherTower.Length; i++)
+            for (int i = 0; i < towerDateScriptableObject.FireTowerDatas.Length; i++)
             {
-                if(towerDateScriptableObject.ArcherTower[i].archerTowerName == sprite.name) 
+                if(towerDateScriptableObject.FireTowerDatas[i].fireTowerName == sprite.name) 
                 {
                     index = i;
                     break;
                 }
             }
-            FireTowerData fireTowerData = towerDateScriptableObject.FireTower[index];
+            FireTowerData fireTowerData = towerDateScriptableObject.FireTowerDatas[index];
             fireTower.SetTowerProperty(pos,TowerAttackType.Single,fireTowerData.fireTowerHealt,fireTowerData.fireTowerLevel,fireTowerData.fireTowerDamage,fireTowerData.fireTowerAttackSpeed,fireTowerData.fireTowerRange,fireTowerData.fireTowerCost);
 
         }
