@@ -6,14 +6,9 @@ using UnityEngine;
 namespace Enemys.Data.BossEnemyData
 {
     [Serializable]
-    public class BossEnemyData 
+    public class BossEnemyData : EnemyData
     {
-        public string boosEnemyName;
-        public float boosEnemyrHealt;
-        public float boosEnemyShield;
-        public float boosEnemyDamage;
-
-        public int boosEnemyLevel;
+        
     }
 
 }

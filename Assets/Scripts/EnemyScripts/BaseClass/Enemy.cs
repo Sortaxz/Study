@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemy.UIController;
 using EnemyCoin.Factory;
+using UnityEngine.UI;
+using Enemys.Data;
 
 namespace Enemy
 {
@@ -21,6 +23,7 @@ namespace Enemy
         
         protected EnemyCoinFactory enemyCoinFactory;
 
+        protected SpriteRenderer enemyImage;
 
         protected Vector3 pos;
 
@@ -37,7 +40,10 @@ namespace Enemy
         public float EnemySpeed => _enemySpeed;
 
         protected float _enemyMaxSpeed;
-        public float MaxEnemyMaxSpeed => _enemyMaxSpeed;
+        public float EnemyMaxSpeed => _enemyMaxSpeed;
+
+        [SerializeField] protected float _enemyAttack;
+        public float EnemyAttack {get {return _enemyAttack;} set {_enemyAttack = value;} }
 
         protected float _enemyMaxAttack;
         public float MaxEnemyMaxAttack => _enemyMaxAttack;
@@ -50,15 +56,13 @@ namespace Enemy
         public int MaxEnemyMaxShield => _enemyMaxShield;
 
 
-        [SerializeField] protected int _enemyDamage;
-        public int EnemyDamage => _enemyDamage;
+        [SerializeField] protected float _enemyDamage;
+        public float EnemyDamage => _enemyDamage;
 
         protected int _enemyMaxDamage;
         public int MaxEnemyMaxDamage => _enemyMaxDamage;
 
 
-        [SerializeField] protected int _enemyAttack;
-        public int EnemyAttack {get {return _enemyAttack;} set {_enemyAttack = value;} }
 
         [SerializeField] protected int _enemyDefense;
         public int EnemyDefense => _enemyDefense;
@@ -94,10 +98,11 @@ namespace Enemy
             transform.name += index.ToString();
             _enemyName = transform.name;
         }
+        
 
         #region  Enemy Healt
-    
-        public virtual void SetEnemyHealt(float healt,float maxHealt)
+
+        public virtual void SetEnemyHealt(float healt, float maxHealt)
         {
             _enemyHealt = healt;
         }
@@ -135,7 +140,7 @@ namespace Enemy
 
         #region  Enemy Speed
     
-        public virtual void SetEnemySpeed(int speed,int maxSpeed)
+        public virtual void SetEnemySpeed(float speed,float maxSpeed)
         {
             _enemySpeed = speed;
             _enemyMaxSpeed = maxSpeed;
@@ -248,9 +253,8 @@ namespace Enemy
 
         #region  Enemy Attack
     
-        public virtual void SetEnemyAttack(GameObject target,int enemyAttack,int enemyMaxAttack)
+        public virtual void SetEnemyAttack(float enemyAttack,float enemyMaxAttack)
         {
-            this.target = target;
             _enemyAttack = enemyAttack;
             _enemyMaxAttack = enemyMaxAttack;
         }
@@ -265,10 +269,10 @@ namespace Enemy
                 if(_enemyBullets.Count > 0 )
                 {
                     EnemyBullet enemyBullet = enemyBulletController.GetEnemyBulletFromPool(_enemyBullets);
-                    enemyBullet.SetBulletDamage(damageValue);
-                    enemyBullet.EnemyBulletMovement(collisionTarget.transform);
                     Vector2 pos = transform.GetChild(0).transform.position;
-                    StartCoroutine(enemyBulletController.DisableEnemyBulletAfterDelay(_enemyBullets,enemyBullet,pos,3));
+                    enemyBullet.SetBulletDamage(damageValue);
+                    enemyBullet.EnemyBulletMovement(collisionTarget.transform,transform.position);
+                    StartCoroutine(enemyBulletController.DisableEnemyBulletAfterDelay(_enemyBullets,enemyBullet,transform.position,3));
                 } 
                
                 attackTime = 0;
@@ -302,15 +306,36 @@ namespace Enemy
             transform.position = newPos;
         }
 
+        public virtual void SetEnemySprite(Sprite enemySprite)
+        {
+            enemyImage.sprite = enemySprite;
+        }
+
+        
+
+        public void EnemyPropertyAdjust(EnemyData enemyData,Transform target,int enemyNameNumber,Vector3 enemyPosition)
+        {
+            SetEnemyName(enemyData.EnemyName, enemyNameNumber);
+            SetEnemySprite(enemyData.EnemySprite);
+            SetEnemyHealt(enemyData.EnemyHealt, enemyData.EnemyMaxHealt);
+            SetEnemySpeed(enemyData.EnemySpeed, enemyData.EnemyMaxSpeed);
+            SetEnemyAttack(enemyData.EnemyAttack, enemyData.EnemyMaxAttack);
+            SetEnemyShield(enemyData.EnemyShield, enemyData.EnemyMaxShield);
+            SetEnemyDamage(enemyData.EnemyDamage, enemyData.EnemyMaxDamage);
+            SetEnemyDefense(enemyData.EnemyDefense, enemyData.EnemyMaxDefense);
+            SetTargetMovement(target);
+            SetEnemyPosition(enemyPosition);
+        }
+
         public virtual BaseEnemy EnemyClone()
         {
             BaseEnemy clonedEnemy = (BaseEnemy)MemberwiseClone();
-        
+
 
             // Derin kopya: enemyBullets nesnesini yeniden oluştur ve içeriği kopyala
             BaseEnemy a = GameObject.Instantiate(clonedEnemy);
             SetEnemyChildGameObjectActive(a);
-            a.isFire = false; 
+            a.isFire = false;
             return a;
         }
 
@@ -342,9 +367,10 @@ namespace Enemy
 
 
 
-        public virtual void SetTargetMovement(Vector3 target)
+        public virtual void SetTargetMovement(Transform target)
         {
-            pos = target;
+            this.target = target.gameObject;
+            pos = target.position;
             StartCoroutine(Move());
         }
 
@@ -360,7 +386,7 @@ namespace Enemy
                     }
                     else
                     {
-                        EnemyAttackFunction(10);
+                        EnemyAttackFunction(_enemyDamage);
                     }
 
                 }
@@ -381,7 +407,6 @@ namespace Enemy
 
         void OnCollisionStay2D(Collision2D collision)
         {
-            print(collision.gameObject.name);
             TargetTowerTypeFind(collision.collider.gameObject,true);
         }
 
@@ -394,30 +419,39 @@ namespace Enemy
 
         private void TargetTowerTypeFind(GameObject targetTower,bool value)
         {
-            switch(targetTower.gameObject.tag)
+            if(targetTower.gameObject.CompareTag("MainTower"))
             {
-                case "ArcherTower":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                break;
-                case "FireTower":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                break;
-                case "IceTower":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                break;
-                case "TowerBullet":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                break;
-                case "MainTower":
-                    isFire = value;
-                    collisionTarget = targetTower;
-                break;
-                default:
-                break;
+                if( targetTower.gameObject.tag != "MainTower" && targetTower.gameObject.tag != "TowerBullet")
+                {
+                    GameObject a = targetTower;
+                    collisionTarget = a;
+                }
+                collisionTarget = targetTower;
+                    isFire =true;
+            }
+            else
+            {
+                switch(targetTower.gameObject.tag)
+                {
+                    case "ArcherTower":
+                        isFire = value;
+                        collisionTarget = targetTower;
+                    break;
+                    case "FireTower":
+                        isFire = value;
+                        collisionTarget = targetTower;
+                    break;
+                    case "IceTower":
+                        isFire = value;
+                        collisionTarget = targetTower;
+                    break;
+                    case "MainTower":
+                        isFire = value;
+                        collisionTarget = targetTower;
+                    break;
+                    default:
+                    break;
+                }
             }
             
         }

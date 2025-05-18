@@ -6,14 +6,9 @@ using UnityEngine;
 namespace Enemys.Data.MageEnemyData
 {
     [Serializable]
-    public class MageEnemyData
+    public class MageEnemyData : EnemyData
     {
-        public string mageEnemyName;
-        public float mageEnemyrHealt;
-        public float mageEnemyShield;
-        public float mageEnemyDamage;
-
-        public int boosEnemyLevel;
+       
     }
 }
 

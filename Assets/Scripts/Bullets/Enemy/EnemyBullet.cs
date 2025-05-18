@@ -13,6 +13,8 @@ namespace Enemy.Bullet
         [SerializeField]private IceTower enemyBulletCollisionIceTower;
         [SerializeField]private GameObject enemyBulletCollisionMaiTower;
         [SerializeField] private GameObject target;
+        private Vector3 oldPosition;
+        public Vector3 OldPosition { get { return oldPosition; }  set { oldPosition = value; } }
         void Awake()
         {
             rb2D = GetComponent<Rigidbody2D>();
@@ -26,7 +28,14 @@ namespace Enemy.Bullet
         public IEnumerator StartEnemyBulletDestoryTime()
         {
             yield return new WaitForSeconds(3);
+
+            target = null;
+            isMove = false;
+
+            transform.position = oldPosition;
+
             gameObject.SetActive(false);
+
         }
 
         void OnTriggerEnter2D(Collider2D collision)
@@ -41,52 +50,63 @@ namespace Enemy.Bullet
 
         private void FindEnemyBulletCollisonGameObject(GameObject collisionGameObject)
         {
-            switch(collisionGameObject.tag)
+            switch (collisionGameObject.tag)
             {
                 case "ArcherTower":
                     enemyBulletCollisionArcherTower = collisionGameObject.GetComponent<ArcherTower>();
-                    gameObject.SetActive(false);
+                    transform.position = oldPosition;
                     enemyBulletCollisionArcherTower.ReductionTowerHealt(bulletDamage);
-                break;
-                
+                    gameObject.SetActive(false);
+                    break;
+
                 case "FireTower":
                     enemyBulletCollisionFireTower = collisionGameObject.GetComponent<FireTower>();
-                    gameObject.SetActive(false);
+                    transform.position = oldPosition;
                     enemyBulletCollisionFireTower.ReductionTowerHealt(bulletDamage);
-                break;
-                
+                    gameObject.SetActive(false);
+                    break;
+
                 case "IceTower":
                     enemyBulletCollisionIceTower = collisionGameObject.GetComponent<IceTower>();
-                    gameObject.SetActive(false);
+                    transform.position = oldPosition;
                     enemyBulletCollisionIceTower.ReductionTowerHealt(bulletDamage);
-                break;
-                
+                    gameObject.SetActive(false);
+                    break;
+
                 case "MainTower":
                     enemyBulletCollisionMaiTower = collisionGameObject;
+                    transform.position = oldPosition;
+                    MainTower.MainTowerDamaged(collisionGameObject, bulletDamage);
                     gameObject.SetActive(false);
-                    MainTower.MainTowerDamaged(collisionGameObject,bulletDamage);
-                break;
-                
+                    break;
+
                 default:
-                break;
+                    break;
 
             }
+
+            
 
         }
 
         [SerializeField] private bool isMove = false;
 
-        public void EnemyBulletMovement(Transform _target)
+        public void EnemyBulletMovement(Transform _target,Vector3 pos)
         {
+            transform.position = oldPosition;
             isMove = true;
             target = _target.gameObject;
         }
 
         void Update()
         {
-            if(target != null)
+            if (isMove)
             {
-                transform.position = Vector3.MoveTowards(transform.position,target.transform.position,5 * Time.deltaTime );
+                if (target != null)
+                    {
+                        if (target.activeSelf)
+                            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, 5 * Time.deltaTime);
+                    }
             }
         }
 

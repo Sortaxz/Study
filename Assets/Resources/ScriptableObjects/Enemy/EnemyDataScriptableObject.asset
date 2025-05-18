@@ -1,0 +1,274 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f43e51ed378934fbcfa40a66f7ba7b, type: 3}
+  m_Name: EnemyDataScriptableObject
+  m_EditorClassIdentifier: 
+  bossEnemyDatas:
+  - EnemyName: BoosEnemy_1
+    EnemyHealt: 100
+    EnemyMaxHealt: 100
+    EnemySprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 5
+    EnemyMaxSpeed: 5
+    EnemyAttack: 5
+    EnemyMaxAttack: 5
+    EnemyShield: 5
+    EnemyMaxShield: 5
+    EnemyDamage: 5
+    EnemyMaxDamage: 5
+    EnemyDefense: 5
+    EnemyMaxDefense: 5
+    EnemyLevel: 0
+    EnemyBulletName: BossEnemyBullet_1
+    EnemyBulletCount: 2
+  - EnemyName: BoosEnemy_2
+    EnemyHealt: 150
+    EnemyMaxHealt: 150
+    EnemySprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 10
+    EnemyMaxSpeed: 10
+    EnemyAttack: 10
+    EnemyMaxAttack: 10
+    EnemyShield: 10
+    EnemyMaxShield: 10
+    EnemyDamage: 10
+    EnemyMaxDamage: 10
+    EnemyDefense: 10
+    EnemyMaxDefense: 10
+    EnemyLevel: 1
+    EnemyBulletName: BossEnemyBullet_2
+    EnemyBulletCount: 5
+  - EnemyName: BoosEnemy_3
+    EnemyHealt: 200
+    EnemyMaxHealt: 200
+    EnemySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 15
+    EnemyMaxSpeed: 15
+    EnemyAttack: 15
+    EnemyMaxAttack: 15
+    EnemyShield: 15
+    EnemyMaxShield: 15
+    EnemyDamage: 15
+    EnemyMaxDamage: 15
+    EnemyDefense: 15
+    EnemyMaxDefense: 15
+    EnemyLevel: 2
+    EnemyBulletName: BossEnemyBullet_3
+    EnemyBulletCount: 8
+  mageEnemyDatas:
+  - EnemyName: MageEnemy_1
+    EnemyHealt: 100
+    EnemyMaxHealt: 100
+    EnemySprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 5
+    EnemyMaxSpeed: 5
+    EnemyAttack: 5
+    EnemyMaxAttack: 5
+    EnemyShield: 5
+    EnemyMaxShield: 5
+    EnemyDamage: 5
+    EnemyMaxDamage: 5
+    EnemyDefense: 5
+    EnemyMaxDefense: 5
+    EnemyLevel: 0
+    EnemyBulletName: MageEnemyBullet_1
+    EnemyBulletCount: 1
+  - EnemyName: MageEnemy_2
+    EnemyHealt: 110
+    EnemyMaxHealt: 110
+    EnemySprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 7
+    EnemyMaxSpeed: 7
+    EnemyAttack: 7
+    EnemyMaxAttack: 7
+    EnemyShield: 7
+    EnemyMaxShield: 7
+    EnemyDamage: 7
+    EnemyMaxDamage: 7
+    EnemyDefense: 7
+    EnemyMaxDefense: 7
+    EnemyLevel: 1
+    EnemyBulletName: MageEnemyBullet_2
+    EnemyBulletCount: 3
+  - EnemyName: MageEnemy_3
+    EnemyHealt: 120
+    EnemyMaxHealt: 120
+    EnemySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 10
+    EnemyMaxSpeed: 10
+    EnemyAttack: 10
+    EnemyMaxAttack: 10
+    EnemyShield: 10
+    EnemyMaxShield: 10
+    EnemyDamage: 10
+    EnemyMaxDamage: 10
+    EnemyDefense: 10
+    EnemyMaxDefense: 10
+    EnemyLevel: 2
+    EnemyBulletName: MageEnemyBullet_3
+    EnemyBulletCount: 5
+  meleeEnemyDatas:
+  - EnemyName: MeleeEnemy_1
+    EnemyHealt: 100
+    EnemyMaxHealt: 100
+    EnemySprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 5
+    EnemyMaxSpeed: 5
+    EnemyAttack: 5
+    EnemyMaxAttack: 5
+    EnemyShield: 5
+    EnemyMaxShield: 5
+    EnemyDamage: 5
+    EnemyMaxDamage: 5
+    EnemyDefense: 5
+    EnemyMaxDefense: 5
+    EnemyLevel: 0
+    EnemyBulletName: MeleeEnemyBullet_1
+    EnemyBulletCount: 1
+  - EnemyName: MeleeEnemy_2
+    EnemyHealt: 110
+    EnemyMaxHealt: 110
+    EnemySprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 7
+    EnemyMaxSpeed: 7
+    EnemyAttack: 7
+    EnemyMaxAttack: 7
+    EnemyShield: 7
+    EnemyMaxShield: 7
+    EnemyDamage: 7
+    EnemyMaxDamage: 7
+    EnemyDefense: 7
+    EnemyMaxDefense: 7
+    EnemyLevel: 1
+    EnemyBulletName: MeleeEnemyBullet_2
+    EnemyBulletCount: 3
+  - EnemyName: MeleeEnemy_3
+    EnemyHealt: 120
+    EnemyMaxHealt: 120
+    EnemySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 10
+    EnemyMaxSpeed: 10
+    EnemyAttack: 10
+    EnemyMaxAttack: 10
+    EnemyShield: 10
+    EnemyMaxShield: 10
+    EnemyDamage: 10
+    EnemyMaxDamage: 10
+    EnemyDefense: 10
+    EnemyMaxDefense: 10
+    EnemyLevel: 2
+    EnemyBulletName: MeleeEnemyBullet_3
+    EnemyBulletCount: 5
+  rangeEnemyDatas:
+  - EnemyName: RangeEnemy_1
+    EnemyHealt: 100
+    EnemyMaxHealt: 100
+    EnemySprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 5
+    EnemyMaxSpeed: 5
+    EnemyAttack: 5
+    EnemyMaxAttack: 5
+    EnemyShield: 5
+    EnemyMaxShield: 5
+    EnemyDamage: 5
+    EnemyMaxDamage: 5
+    EnemyDefense: 5
+    EnemyMaxDefense: 5
+    EnemyLevel: 0
+    EnemyBulletName: RangeEnemyBullet_1
+    EnemyBulletCount: 1
+  - EnemyName: RangeEnemy_2
+    EnemyHealt: 110
+    EnemyMaxHealt: 110
+    EnemySprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 7
+    EnemyMaxSpeed: 7
+    EnemyAttack: 7
+    EnemyMaxAttack: 7
+    EnemyShield: 7
+    EnemyMaxShield: 7
+    EnemyDamage: 7
+    EnemyMaxDamage: 7
+    EnemyDefense: 7
+    EnemyMaxDefense: 7
+    EnemyLevel: 1
+    EnemyBulletName: RangeEnemyBullet_2
+    EnemyBulletCount: 3
+  - EnemyName: RangeEnemy_3
+    EnemyHealt: 120
+    EnemyMaxHealt: 120
+    EnemySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 10
+    EnemyMaxSpeed: 10
+    EnemyAttack: 10
+    EnemyMaxAttack: 10
+    EnemyShield: 10
+    EnemyMaxShield: 10
+    EnemyDamage: 10
+    EnemyMaxDamage: 10
+    EnemyDefense: 10
+    EnemyMaxDefense: 10
+    EnemyLevel: 2
+    EnemyBulletName: RangeEnemyBullet_3
+    EnemyBulletCount: 5
+  tankEnemyDatas:
+  - EnemyName: TankEnemy_1
+    EnemyHealt: 100
+    EnemyMaxHealt: 100
+    EnemySprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 5
+    EnemyMaxSpeed: 5
+    EnemyAttack: 5
+    EnemyMaxAttack: 5
+    EnemyShield: 5
+    EnemyMaxShield: 5
+    EnemyDamage: 5
+    EnemyMaxDamage: 5
+    EnemyDefense: 5
+    EnemyMaxDefense: 5
+    EnemyLevel: 0
+    EnemyBulletName: TankEnemyBullet_1
+    EnemyBulletCount: 1
+  - EnemyName: TankEnemy_2
+    EnemyHealt: 110
+    EnemyMaxHealt: 110
+    EnemySprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 7
+    EnemyMaxSpeed: 7
+    EnemyAttack: 7
+    EnemyMaxAttack: 7
+    EnemyShield: 7
+    EnemyMaxShield: 7
+    EnemyDamage: 7
+    EnemyMaxDamage: 7
+    EnemyDefense: 7
+    EnemyMaxDefense: 7
+    EnemyLevel: 1
+    EnemyBulletName: TankEnemyBullet_2
+    EnemyBulletCount: 3
+  - EnemyName: TankEnemy_3
+    EnemyHealt: 120
+    EnemyMaxHealt: 120
+    EnemySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    EnemySpeed: 10
+    EnemyMaxSpeed: 10
+    EnemyAttack: 10
+    EnemyMaxAttack: 10
+    EnemyShield: 10
+    EnemyMaxShield: 10
+    EnemyDamage: 10
+    EnemyMaxDamage: 10
+    EnemyDefense: 10
+    EnemyMaxDefense: 10
+    EnemyLevel: 2
+    EnemyBulletName: TankEnemyBullet_3
+    EnemyBulletCount: 5

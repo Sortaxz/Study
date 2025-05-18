@@ -166,46 +166,41 @@ public class GameManager : MonoBehaviour
     public void CreateBossEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        BossEnemy bossEnemy1 = enemyFactory.Create(EnemyNameEnum.BossEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as BossEnemy;
+        BossEnemy bossEnemy1 = enemyFactory.Create(EnemyNameEnum.BossEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.BoosEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as BossEnemy;
         enemyFactory.SaveEnemyTypeFindToList(bossEnemy1);
-        bossEnemy1.SetEnemyAttack(null, 500, 1000);
-        bossEnemy1.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+        bossEnemy1.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
 
     public void CreateMageEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        MageEnemy mageEnemy = enemyFactory.Create(EnemyNameEnum.MageEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MageEnemy;
+        MageEnemy mageEnemy = enemyFactory.Create(EnemyNameEnum.MageEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.MageEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MageEnemy;
         enemyFactory.SaveEnemyTypeFindToList(mageEnemy);
-        mageEnemy.SetEnemyAttack(null, 500, 1000);
-        mageEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+        mageEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
 
     public void CreateMeleeEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        MeleeEnemy meleeEnemy = enemyFactory.Create(EnemyNameEnum.MeleeEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MeleeEnemy;
+        MeleeEnemy meleeEnemy = enemyFactory.Create(EnemyNameEnum.MeleeEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.MeleeEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MeleeEnemy;
         enemyFactory.SaveEnemyTypeFindToList(meleeEnemy);
-        meleeEnemy.SetEnemyAttack(null, 500, 1000);
-        meleeEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+        meleeEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
 
     public void CreateRangeEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        RangeEnemy rangeEnemy = enemyFactory.Create(EnemyNameEnum.RangeEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as RangeEnemy;
+        RangeEnemy rangeEnemy = enemyFactory.Create(EnemyNameEnum.RangeEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.RangeEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as RangeEnemy;
         enemyFactory.SaveEnemyTypeFindToList(rangeEnemy);
-        rangeEnemy.SetEnemyAttack(null, 500, 1000);
-        rangeEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+        rangeEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
 
     public void CreateTankEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        TankEnemy tankEnemy = enemyFactory.Create(EnemyNameEnum.TankEnemy_1, GameUIManager.Instance.EnemyPositions[randomIndex].position) as TankEnemy;
+        TankEnemy tankEnemy = enemyFactory.Create(EnemyNameEnum.TankEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.TankEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as TankEnemy;
         enemyFactory.SaveEnemyTypeFindToList(tankEnemy);
-        tankEnemy.SetEnemyAttack(null, 500, 1000);
-        tankEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform.position);
+        tankEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
 
     public  void GameOver()

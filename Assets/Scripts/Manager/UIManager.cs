@@ -137,4 +137,11 @@ public class UIManager : MonoBehaviour
     {
         return finalPanel != null && win_Text != null && lose_Text != null;
     }
+
+
+    public void GameAgain()
+    {
+        finalPanel.gameObject.SetActive(false);
+    }
+
 }

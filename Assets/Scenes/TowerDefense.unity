@@ -2235,7 +2235,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1599839428}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 680911955}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: GameAgain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1599839428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3303,6 +3315,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6150498613737101900, guid: cf57fdb85c439224e9f51d666a8d4350,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 7.29
+      objectReference: {fileID: 0}
     - target: {fileID: 7759091596931763783, guid: cf57fdb85c439224e9f51d666a8d4350,
         type: 3}
       propertyPath: m_Name
@@ -3310,8 +3327,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7870576411471043652, guid: cf57fdb85c439224e9f51d666a8d4350,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870576411471043652, guid: cf57fdb85c439224e9f51d666a8d4350,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870576411471043652, guid: cf57fdb85c439224e9f51d666a8d4350,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.09
+      value: -9.25
       objectReference: {fileID: 0}
     - target: {fileID: 7870576411471043652, guid: cf57fdb85c439224e9f51d666a8d4350,
         type: 3}

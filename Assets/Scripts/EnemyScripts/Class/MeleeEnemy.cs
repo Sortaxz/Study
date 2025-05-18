@@ -5,48 +5,51 @@ using Enemy.Bullet;
 using Enemy.UIController;
 using EnemyCoin.Factory;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Enemy
 {
-    public class MeleeEnemy : BaseEnemy, IMeleeEnemy
+    public class MeleeEnemy : BaseEnemy
     {
 
 
         [SerializeField] List<EnemyBullet> bullets;
-        
 
 
 
-        private void Awake() 
+
+        private void Awake()
         {
-            if(enemyBulletController == null)
+            if (enemyBulletController == null)
             {
-                enemyBulletController = new EnemyBulletController();    
+                enemyBulletController = new EnemyBulletController();
             }
 
-            if(enemyUIController == null)
+            if (enemyUIController == null)
             {
-                enemyUIController = GetComponent<EnemyUIController>();   
+                enemyUIController = GetComponent<EnemyUIController>();
             }
-            
-            if(transform.GetChild(0).childCount < 1)
+
+            if (transform.GetChild(0).childCount < 1)
             {
-                _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.CreateEnemyBullets(transform.GetChild(0).transform,3));
+                _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.CreateEnemyBullets(transform.GetChild(0).transform, 3));
             }
-            else if(transform.GetChild(0).childCount >= 1)
+            else if (transform.GetChild(0).childCount >= 1)
             {
                 _enemyBullets = new Queue<EnemyBullet>(enemyBulletController.GetEnemyBulletFromEnemyBulletsList(transform.GetChild(0)));
                 bullets = _enemyBullets.ToList();
-                
-                
+
+
             }
 
-            botyGold = Random.Range(0,100);            
-            
-            if(enemyCoinFactory == null)
+            botyGold = Random.Range(0, 100);
+
+            if (enemyCoinFactory == null)
             {
                 enemyCoinFactory = new EnemyCoinFactory();
             }
+            
+            if (enemyImage == null) enemyImage = GetComponent<SpriteRenderer>();
         }
 
 
