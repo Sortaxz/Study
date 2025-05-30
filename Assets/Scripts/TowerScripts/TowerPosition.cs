@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Towers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Towers.Position
 {
 
-    public class TowerPosition : MonoBehaviour
+    public class TowerPosition : MonoBehaviour,IPointerDownHandler
     {
         [SerializeField]private SpriteRenderer towerPositionImage;
         [SerializeField] private bool isFull = false;
@@ -54,6 +55,8 @@ namespace Towers.Position
                 SetTowerSelectionUIActive(isClick);
             }
         }
+        
+        
 
         //tiklanilabilir olmasini sağliyor.
         public void SetTowerPositionInteractable(bool value)
@@ -77,5 +80,9 @@ namespace Towers.Position
             }
         }
 
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            
+        }
     }
 }

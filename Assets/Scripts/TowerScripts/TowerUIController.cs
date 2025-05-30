@@ -6,27 +6,28 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TowerUIController : MonoBehaviour
-{   
+{
     private Tower tower;
     private TowerUpgrade towerUpgrade;
     [SerializeField] Image healtBar;
     [SerializeField] private Image towerUpgradeIcon;
-    [SerializeField]private Button towerUpgradeButton=> towerUpgradeIcon.GetComponent<Button>();
+    [SerializeField] private Image towerFireIconImage;
+    [SerializeField] private Button towerUpgradeButton => towerUpgradeIcon.GetComponent<Button>();
 
     void Awake()
     {
 
         tower = gameObject.GetComponent<Tower>();
-        if(towerUpgrade == null)towerUpgrade = new TowerUpgrade();
-        if(!gameObject.CompareTag("MainTower"))
+        if (towerUpgrade == null) towerUpgrade = new TowerUpgrade();
+        if (!gameObject.CompareTag("MainTower"))
         {
-            if(GameManager.Instance.BalanceOperations.CoinValue > tower.TowerCost)
+            if (GameManager.Instance.BalanceOperations.CoinValue > tower.TowerCost)
             {
                 SetTowerUpgradeIconActive(true);
             }
         }
 
-       
+
     }
 
     void Start()
@@ -51,19 +52,31 @@ public class TowerUIController : MonoBehaviour
 
     public void SetTowerUpgradeIconActive(bool isActive)
     {
-        towerUpgradeIcon.gameObject.SetActive(isActive);    
+        towerUpgradeIcon.gameObject.SetActive(isActive);
         SetTowerUpgradeButtonInteractableActive(isActive);
     }
-    
+
     public void SetTowerUpgradeButtonInteractableActive(bool isActive)
     {
-        towerUpgradeButton.interactable =isActive;
+        towerUpgradeButton.interactable = isActive;
     }
 
     public void TowerUpgradeButton()
     {
         towerUpgrade.Upgrade(tower);
         towerUpgradeIcon.gameObject.SetActive(false);
+    }
+
+    public void TowerFireIconOpen(bool value)
+    {
+        TowerFireUI towerFireUI = towerFireIconImage.GetComponent<TowerFireUI>();
+        towerFireUI.gameObject.SetActive(value);
+        towerFireUI.TowerFireUIActiveFuntion(value);
+    }
+
+    public void TowerFireIconClose()
+    {
+        towerFireIconImage.gameObject.SetActive(false);
     }
 
 }

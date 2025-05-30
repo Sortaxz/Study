@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyDataScriptableObject
   m_EditorClassIdentifier: 
   bossEnemyDatas:
-  - EnemyName: BoosEnemy_1
+  - EnemyName: BossEnemy_1
     EnemyHealt: 100
     EnemyMaxHealt: 100
     EnemySprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
@@ -30,7 +30,7 @@ MonoBehaviour:
     EnemyLevel: 0
     EnemyBulletName: BossEnemyBullet_1
     EnemyBulletCount: 2
-  - EnemyName: BoosEnemy_2
+  - EnemyName: BossEnemy_2
     EnemyHealt: 150
     EnemyMaxHealt: 150
     EnemySprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
     EnemyLevel: 1
     EnemyBulletName: BossEnemyBullet_2
     EnemyBulletCount: 5
-  - EnemyName: BoosEnemy_3
+  - EnemyName: BossEnemy_3
     EnemyHealt: 200
     EnemyMaxHealt: 200
     EnemySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

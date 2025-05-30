@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TowerData.Archer;
+using TowerDatas.Archer;
 using Towers.DataScriptableObject;
 using UnityEngine;
 
@@ -40,14 +40,14 @@ namespace Towers
             int index = 0;
             for (int i = 0; i < towerDateScriptableObject.ArcherTowerDatas.Length; i++)
             {
-                if(towerDateScriptableObject.ArcherTowerDatas[i].archerTowerName == sprite.name) 
+                if(towerDateScriptableObject.ArcherTowerDatas[i].towerName == sprite.name) 
                 {
                     index = i;
                     break;
                 }
             }
             ArcherTowerData archerTowerData = towerDateScriptableObject.ArcherTowerDatas[index];
-            archerTower.SetTowerProperty(pos,TowerAttackType.Single,archerTowerData.archerTowerHealt,archerTowerData.archerTowerLevel,archerTowerData.archerTowerDamage,archerTowerData.towerAttackSpeed,archerTowerData.towerRange,archerTowerData.towerCost);
+            archerTower.SetTowerProperty(pos,TowerAttackType.Single,archerTowerData);
 
         }
     }

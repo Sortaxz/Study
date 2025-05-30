@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TowerData.Fire;
+using TowerDatas.Fire;
 using Towers.DataScriptableObject;
 using UnityEngine;
 
@@ -36,14 +36,14 @@ namespace Towers
             int index = 0;
             for (int i = 0; i < towerDateScriptableObject.FireTowerDatas.Length; i++)
             {
-                if(towerDateScriptableObject.FireTowerDatas[i].fireTowerName == sprite.name) 
+                if(towerDateScriptableObject.FireTowerDatas[i].towerName == sprite.name) 
                 {
                     index = i;
                     break;
                 }
             }
             FireTowerData fireTowerData = towerDateScriptableObject.FireTowerDatas[index];
-            fireTower.SetTowerProperty(pos,TowerAttackType.Single,fireTowerData.fireTowerHealt,fireTowerData.fireTowerLevel,fireTowerData.fireTowerDamage,fireTowerData.fireTowerAttackSpeed,fireTowerData.fireTowerRange,fireTowerData.fireTowerCost);
+            fireTower.SetTowerProperty(pos,TowerAttackType.Single,fireTowerData);
 
         }
     }

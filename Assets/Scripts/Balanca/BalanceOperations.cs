@@ -6,18 +6,18 @@ namespace Balance
 {
     public class BalanceOperations 
     {
-        private int coinValue;
-        public int CoinValue => coinValue;
+        private float coinValue;
+        public float CoinValue => coinValue;
 
-        public int CoinValueIncrease(int increaseValue)
+        public float CoinValueIncrease(int increaseValue)
         {
             coinValue+=increaseValue;
             return coinValue;
         }
 
-        public int CoinValueReduction(int reductionValue)
+        public float CoinValueReduction(float reductionValue)
         {
-            int result = coinValue - reductionValue; 
+            float result = coinValue - reductionValue; 
             
             if(result > 0)
             {
@@ -31,7 +31,7 @@ namespace Balance
             return coinValue;   
         }
 
-        public int GetCoinValue()
+        public float GetCoinValue()
         {
             return coinValue;
         }

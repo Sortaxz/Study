@@ -36,19 +36,11 @@ namespace EnemyFactorys
 
         public BaseEnemy Create(EnemyNameEnum enemyName,EnemyFactoryType enemyFactoryType,Transform target, Vector3 position)
         {
-
             if (enemyPool.TryGetValue(enemyName.ToString(), out BaseEnemy enemy))
             {
                 BaseEnemy baseEnemy = enemy.EnemyClone();
 
-                /*
-                baseEnemy.SetEnemyPosition(position);
-                baseEnemy.SetEnemyName(baseEnemy.name,createEnemyCount);
-                */
-
-                /*
-                    _enemy.EnemyPropertyAdjust(enemyDataScriptableObject);
-                */
+                
 
                 FactoryTypeIndexDetermination(enemyFactoryType,enemyName,baseEnemy,target,createEnemyCount,position);
 
@@ -63,10 +55,7 @@ namespace EnemyFactorys
             BaseEnemy _enemy = GameObject.Instantiate(prefab).GetComponent<BaseEnemy>();
             FactoryTypeIndexDetermination(enemyFactoryType,enemyName,_enemy,target,createEnemyCount,position);
 
-            /*
-            _enemy.SetEnemyPosition(position);
-            _enemy.SetEnemyName(_enemy.name,createEnemyCount);
-            */
+           
 
 
 
@@ -87,23 +76,28 @@ namespace EnemyFactorys
             {
                 case EnemyFactoryType.BoosEnemyFactory:
                     index = enemyDataQuery.EnemyFromEnemyListQuery(enemyDataScriptableObject.BossEnemyDatas, enemyPrefabName.ToString());
+                    Debug.Log(index);
                     enemy.EnemyPropertyAdjust(enemyDataScriptableObject.BossEnemyDatas[index],target,enemyNameNumber,enemyPosition);
                     break;
                 case EnemyFactoryType.MeleeEnemyFactory:
                     index = enemyDataQuery.EnemyFromEnemyListQuery(enemyDataScriptableObject.MeleeEnemyDatas, enemyPrefabName.ToString());
+                    Debug.Log(index);
                     enemy.EnemyPropertyAdjust(enemyDataScriptableObject.MeleeEnemyDatas[index],target,enemyNameNumber,enemyPosition);
                     break;
                 case EnemyFactoryType.MageEnemyFactory:
-                    index = enemyDataQuery.EnemyFromEnemyListQuery(enemyDataScriptableObject.MeleeEnemyDatas, enemyPrefabName.ToString());
-                    enemy.EnemyPropertyAdjust(enemyDataScriptableObject.MeleeEnemyDatas[index],target,enemyNameNumber,enemyPosition);
+                    index = enemyDataQuery.EnemyFromEnemyListQuery(enemyDataScriptableObject.MageEnemyDatas, enemyPrefabName.ToString());
+                    Debug.Log(index);
+                    enemy.EnemyPropertyAdjust(enemyDataScriptableObject.MageEnemyDatas[index],target,enemyNameNumber,enemyPosition);
                     break;
                 case EnemyFactoryType.RangeEnemyFactory:
-                    index = enemyDataQuery.EnemyFromEnemyListQuery(enemyDataScriptableObject.MeleeEnemyDatas, enemyPrefabName.ToString());
-                    enemy.EnemyPropertyAdjust(enemyDataScriptableObject.MeleeEnemyDatas[index],target,enemyNameNumber,enemyPosition);
+                    index = enemyDataQuery.EnemyFromEnemyListQuery(enemyDataScriptableObject.RangeEnemyDatas, enemyPrefabName.ToString());
+                    Debug.Log(index);
+                    enemy.EnemyPropertyAdjust(enemyDataScriptableObject.RangeEnemyDatas[index],target,enemyNameNumber,enemyPosition);
                     break;
                 case EnemyFactoryType.TankEnemyFactory:
-                    index = enemyDataQuery.EnemyFromEnemyListQuery(enemyDataScriptableObject.MeleeEnemyDatas, enemyPrefabName.ToString());
-                    enemy.EnemyPropertyAdjust(enemyDataScriptableObject.MeleeEnemyDatas[index],target,enemyNameNumber,enemyPosition);
+                    index = enemyDataQuery.EnemyFromEnemyListQuery(enemyDataScriptableObject.TankEnemyDatas, enemyPrefabName.ToString());
+                    Debug.Log(index);
+                    enemy.EnemyPropertyAdjust(enemyDataScriptableObject.TankEnemyDatas[index],target,enemyNameNumber,enemyPosition);
                     break;
                 default:
                     break;

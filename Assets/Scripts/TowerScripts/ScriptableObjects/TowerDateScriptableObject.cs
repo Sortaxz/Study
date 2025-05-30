@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using TowerData.Archer;
-using TowerData.Fire;
-using TowerData.Ice;
+using TowerDatas.Archer;
+using TowerDatas.Fire;
+using TowerDatas.Ice;
 using UnityEngine;
 
 namespace Towers.DataScriptableObject

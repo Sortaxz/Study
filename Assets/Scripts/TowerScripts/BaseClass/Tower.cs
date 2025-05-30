@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemy;
 using TowerBulletControl;
+using TowerDatas;
 using Towers.UpgradeControl;
 using UnityEngine;
 
@@ -52,14 +53,14 @@ namespace Towers
         [SerializeField]protected float towerDamage;
         public float TowerDamage { get { return towerDamage;} set { towerDamage = value;} }
         
-        [SerializeField]protected int towerAttackSpeed;
-        public int TowerAttackSpeed { get { return towerAttackSpeed;} set { towerAttackSpeed = value;}}
+        [SerializeField]protected float towerAttackSpeed;
+        public float TowerAttackSpeed { get { return towerAttackSpeed;} set { towerAttackSpeed = value;}}
         
-        [SerializeField]protected int towerRange;
-        public int TowerRange { get { return towerRange;} set { towerRange = value;}}
+        [SerializeField]protected float towerRange;
+        public float TowerRange { get { return towerRange;} set { towerRange = value;}}
         
-        [SerializeField]protected int towerCost;
-        public int TowerCost { get { return towerCost;} set { towerCost = value;} }
+        [SerializeField]protected float towerCost;
+        public float TowerCost { get { return towerCost;} set { towerCost = value;} }
 
 
         [SerializeField] protected bool isStop = false;
@@ -78,9 +79,10 @@ namespace Towers
             transform.name = name;
         }
 
-        public virtual void SetTowerHealt(float _towerHealt)
+        public virtual void SetTowerHealt(float _towerHealt,float _towerMaxHealt)
         {
             towerHealt = _towerHealt;
+            maxTowerHealt = _towerMaxHealt;
             towerUIController.SetHealtBarValue(towerHealt);
         }
 
@@ -136,40 +138,46 @@ namespace Towers
             towerDamage = _damage;
         }
         
-        public virtual void SetTowerAttackSpeed(int _attackSpeed)
+        public virtual void SetTowerAttackSpeed(float _attackSpeed)
         {
             towerAttackSpeed = _attackSpeed;
         }
         
-        public virtual void SetTowerRange(int _range)
+        public virtual void SetTowerRange(float _range)
         {
             towerRange = _range;
         }
 
-        public virtual void SetTowerCost(int _cost)
+        public virtual void SetTowerCost(float _cost)
         {
             towerCost = _cost;
         }
 
+        public virtual void SetTowerShield(float _towerShield)
+        {
+            towerShield = _towerShield;
+        }
+
         public virtual void SetTowerTargetPriority(GameObject targetPriority)
         {
-            if(towerTargetPriority !=  targetPriority  && targetPriority.GetComponent<BaseEnemy>() != null)
+            if (towerTargetPriority != targetPriority && targetPriority.GetComponent<BaseEnemy>() != null)
             {
                 towerTargetPriority = targetPriority;
 
             }
         }
 
-        public virtual void SetTowerProperty(Vector3 pos,TowerAttackType towerAttackType,float healt,int level,float _damage,int _attackSpeed,int _range,int _cost)
+        public virtual void SetTowerProperty(Vector3 pos, TowerAttackType towerAttackType, TowerData towerData)
         {
-            SetTowerHealt(healt);
+            SetTowerHealt(towerData.towerHealt, towerData.towerMaxHealt);
             SetTowerPosition(pos);
             SetTowerAttackType(towerAttackType);
-            SetTowerDamage(_damage);
-            SetTowerAttackSpeed(_attackSpeed);
-            SetTowerRange(_range);
-            SetTowerCost(_cost);
-            SetTowerLevel(level);
+            SetTowerDamage(towerData.towerDamage);
+            SetTowerAttackSpeed(towerData.towerAttackSpeed);
+            SetTowerRange(towerData.towerRange);
+            SetTowerCost(towerData.towerCost);
+            SetTowerLevel(towerData.towerLevel);
+            SetTowerShield(towerData.towerShield);
         }
         
         void OnTriggerEnter2D(Collider2D collision)
@@ -245,10 +253,15 @@ namespace Towers
                 {
                     if (towerTargetPriority != null)
                     {
-                        towerBullet = towerBulletController.GetFromTowerBulletList(towerBullets, towerTargetPriority.gameObject,towerDamage);
+                        towerBullet = towerBulletController.GetFromTowerBulletList(towerBullets, towerTargetPriority.gameObject, towerDamage);
 
                     }
+                    bool value = towerTargetPriority == null ? false : true;
+                    towerUIController.TowerFireIconOpen(value);
+                    
                 }
+                
+
                 yield return new WaitForSeconds(3);
                 if (towerBullet != null)
                     towerBulletController.ReturToTowerBulletList(towerBullets, towerBullet, transform.position);

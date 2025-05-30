@@ -48,9 +48,9 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            
-            CreateRandomEnemy();
-
+            //CreateBossEnemy();
+            //CreateRandomEnemy();
+            CreateBossEnemy();
         }
 
 
@@ -132,33 +132,34 @@ public class GameManager : MonoBehaviour
 
     public void CreateRandomEnemy()
     {
-        int randomCreateIndex = Random.Range(0,4);
+        int randomCreateIndex = Random.Range(0,5);
+        print(randomCreateIndex);
         switch (randomCreateIndex)
         {
-            
+
             case 0:
-                CreateBossEnemy();    
-            break;
+                CreateBossEnemy();
+                break;
 
             case 1:
                 CreateMageEnemy();
-            break;
-            
+                break;
+
             case 2:
                 CreateMeleeEnemy();
-            break;
-            
+                break;
+
             case 3:
                 CreateRangeEnemy();
-            break;
-            
+                break;
+
             case 4:
                 CreateTankEnemy();
-            break;
+                break;
 
             default:
-            break;
-        
+                break;
+
         }
     }
 
@@ -166,7 +167,7 @@ public class GameManager : MonoBehaviour
     public void CreateBossEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        BossEnemy bossEnemy1 = enemyFactory.Create(EnemyNameEnum.BossEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.BoosEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as BossEnemy;
+        BossEnemy bossEnemy1 = enemyFactory.Create(EnemyNameEnum.BossEnemy_2,EnemyFactorys.TypeEnums.EnemyFactoryType.BoosEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as BossEnemy;
         enemyFactory.SaveEnemyTypeFindToList(bossEnemy1);
         bossEnemy1.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
@@ -174,7 +175,7 @@ public class GameManager : MonoBehaviour
     public void CreateMageEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        MageEnemy mageEnemy = enemyFactory.Create(EnemyNameEnum.MageEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.MageEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MageEnemy;
+        MageEnemy mageEnemy = enemyFactory.Create(EnemyNameEnum.MageEnemy_2,EnemyFactorys.TypeEnums.EnemyFactoryType.MageEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MageEnemy;
         enemyFactory.SaveEnemyTypeFindToList(mageEnemy);
         mageEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
@@ -182,7 +183,7 @@ public class GameManager : MonoBehaviour
     public void CreateMeleeEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        MeleeEnemy meleeEnemy = enemyFactory.Create(EnemyNameEnum.MeleeEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.MeleeEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MeleeEnemy;
+        MeleeEnemy meleeEnemy = enemyFactory.Create(EnemyNameEnum.MeleeEnemy_2,EnemyFactorys.TypeEnums.EnemyFactoryType.MeleeEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as MeleeEnemy;
         enemyFactory.SaveEnemyTypeFindToList(meleeEnemy);
         meleeEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
@@ -190,7 +191,7 @@ public class GameManager : MonoBehaviour
     public void CreateRangeEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        RangeEnemy rangeEnemy = enemyFactory.Create(EnemyNameEnum.RangeEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.RangeEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as RangeEnemy;
+        RangeEnemy rangeEnemy = enemyFactory.Create(EnemyNameEnum.RangeEnemy_2,EnemyFactorys.TypeEnums.EnemyFactoryType.RangeEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as RangeEnemy;
         enemyFactory.SaveEnemyTypeFindToList(rangeEnemy);
         rangeEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
@@ -198,7 +199,7 @@ public class GameManager : MonoBehaviour
     public void CreateTankEnemy()
     {
         int randomIndex = Random.Range(0, GameUIManager.Instance.EnemyPositions.Length);
-        TankEnemy tankEnemy = enemyFactory.Create(EnemyNameEnum.TankEnemy_1,EnemyFactorys.TypeEnums.EnemyFactoryType.TankEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as TankEnemy;
+        TankEnemy tankEnemy = enemyFactory.Create(EnemyNameEnum.TankEnemy_2,EnemyFactorys.TypeEnums.EnemyFactoryType.TankEnemyFactory,GameUIManager.Instance.Target.transform, GameUIManager.Instance.EnemyPositions[randomIndex].position) as TankEnemy;
         enemyFactory.SaveEnemyTypeFindToList(tankEnemy);
         tankEnemy.SetTargetMovement(GameUIManager.Instance.Target.transform);
     }
@@ -223,7 +224,7 @@ public class GameManager : MonoBehaviour
         TowerObjectsUpgradeStateControl();
     }
 
-    public void CoinReduction(int coinReductionValue)   
+    public void CoinReduction(float coinReductionValue)   
     {
         print(coinReductionValue);
         UIManager.Instance.BalanceOperationsUIControl.SetCoinValueReductionText(coinReductionValue);

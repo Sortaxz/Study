@@ -13,117 +13,161 @@ MonoBehaviour:
   m_Name: TowerDataScriptableObject
   m_EditorClassIdentifier: 
   archerTowerDatas:
-  - archerTowerName: ArcherTower_Asset 21
-    archerTowerSprite: {fileID: 21300000, guid: c09b8056edd9b7042a96ce5f343c8c86,
-      type: 3}
-    archerTowerHealt: 50
-    archerTowerShield: 50
-    archerTowerDamage: 10
-    archerTowerLevel: 1
-    towerAttackSpeed: 1
-    towerRange: 5
+  - towerName: ArcherTower_1
+    towerSprite: {fileID: 21300000, guid: c09b8056edd9b7042a96ce5f343c8c86, type: 3}
+    towerHealt: 100
+    towerMaxHealt: 100
+    towerShield: 25
+    towerMaxShield: 25
+    towerDamage: 15
+    towerMaxDamage: 20
+    towerLevel: 1
+    towerAttackSpeed: 0.25
+    towerMaxAttackSpeed: 0.25
+    towerRange: 1
     towerCost: 50
-  - archerTowerName: ArcherTower_Asset 24
-    archerTowerSprite: {fileID: 21300000, guid: 23e6ddb37b7ddeb41ba08b1d58f5c361,
-      type: 3}
-    archerTowerHealt: 100
-    archerTowerShield: 100
-    archerTowerDamage: 20
-    archerTowerLevel: 2
-    towerAttackSpeed: 2
-    towerRange: 15
+  - towerName: ArcherTower_2
+    towerSprite: {fileID: 21300000, guid: 23e6ddb37b7ddeb41ba08b1d58f5c361, type: 3}
+    towerHealt: 110
+    towerMaxHealt: 110
+    towerShield: 50
+    towerMaxShield: 50
+    towerDamage: 25
+    towerMaxDamage: 25
+    towerLevel: 2
+    towerAttackSpeed: 0.5
+    towerMaxAttackSpeed: 0.5
+    towerRange: 3
     towerCost: 100
-  - archerTowerName: ArcherTower_Asset 30
-    archerTowerSprite: {fileID: 21300000, guid: 54e1e2c1c5a9cd4458ee15a6a0ac065b,
-      type: 3}
-    archerTowerHealt: 150
-    archerTowerShield: 150
-    archerTowerDamage: 30
-    archerTowerLevel: 3
-    towerAttackSpeed: 3
-    towerRange: 25
+  - towerName: ArcherTower_3
+    towerSprite: {fileID: 21300000, guid: 54e1e2c1c5a9cd4458ee15a6a0ac065b, type: 3}
+    towerHealt: 120
+    towerMaxHealt: 120
+    towerShield: 75
+    towerMaxShield: 75
+    towerDamage: 35
+    towerMaxDamage: 35
+    towerLevel: 3
+    towerAttackSpeed: 1
+    towerMaxAttackSpeed: 1
+    towerRange: 5
     towerCost: 150
-  - archerTowerName: ArcherTower_Asset 27
-    archerTowerSprite: {fileID: 21300000, guid: b31897c0eb71e294c847585073dc7e79,
-      type: 3}
-    archerTowerHealt: 200
-    archerTowerShield: 200
-    archerTowerDamage: 40
-    archerTowerLevel: 4
-    towerAttackSpeed: 4
-    towerRange: 35
+  - towerName: ArcherTower_4
+    towerSprite: {fileID: 21300000, guid: b31897c0eb71e294c847585073dc7e79, type: 3}
+    towerHealt: 130
+    towerMaxHealt: 130
+    towerShield: 100
+    towerMaxShield: 100
+    towerDamage: 45
+    towerMaxDamage: 45
+    towerLevel: 4
+    towerAttackSpeed: 1.25
+    towerMaxAttackSpeed: 1.25
+    towerRange: 6
     towerCost: 200
   fireTowerDatas:
-  - fireTowerName: FireTower_Asset 21
-    fireTowerSprite: {fileID: 21300000, guid: 93ea3630e596f0e419ade95ccb9c2fd4, type: 3}
-    fireTowerHealt: 50
-    fireTowerShield: 50
-    fireTowerDamage: 10
-    fireTowerLevel: 1
-    fireTowerAttackSpeed: 1
-    fireTowerRange: 5
-    fireTowerCost: 50
-  - fireTowerName: FireTower_Asset 24
-    fireTowerSprite: {fileID: 21300000, guid: 80ad2198874c383419618bb8ea5afe17, type: 3}
-    fireTowerHealt: 100
-    fireTowerShield: 100
-    fireTowerDamage: 20
-    fireTowerLevel: 2
-    fireTowerAttackSpeed: 2
-    fireTowerRange: 15
-    fireTowerCost: 100
-  - fireTowerName: FireTower_Asset 30
-    fireTowerSprite: {fileID: 21300000, guid: 2d68b5a1520c469478e7cbf88318a483, type: 3}
-    fireTowerHealt: 150
-    fireTowerShield: 150
-    fireTowerDamage: 30
-    fireTowerLevel: 3
-    fireTowerAttackSpeed: 3
-    fireTowerRange: 25
-    fireTowerCost: 150
-  - fireTowerName: FireTower_Asset 27
-    fireTowerSprite: {fileID: 21300000, guid: 3be657a29ff63da4d8245bac774d39e7, type: 3}
-    fireTowerHealt: 200
-    fireTowerShield: 200
-    fireTowerDamage: 40
-    fireTowerLevel: 4
-    fireTowerAttackSpeed: 4
-    fireTowerRange: 35
-    fireTowerCost: 200
+  - towerName: 
+    towerSprite: {fileID: 0}
+    towerHealt: 0
+    towerMaxHealt: 0
+    towerShield: 0
+    towerMaxShield: 0
+    towerDamage: 0
+    towerMaxDamage: 0
+    towerLevel: 0
+    towerAttackSpeed: 0
+    towerMaxAttackSpeed: 0
+    towerRange: 0
+    towerCost: 0
+  - towerName: 
+    towerSprite: {fileID: 0}
+    towerHealt: 0
+    towerMaxHealt: 0
+    towerShield: 0
+    towerMaxShield: 0
+    towerDamage: 0
+    towerMaxDamage: 0
+    towerLevel: 0
+    towerAttackSpeed: 0
+    towerMaxAttackSpeed: 0
+    towerRange: 0
+    towerCost: 0
+  - towerName: 
+    towerSprite: {fileID: 0}
+    towerHealt: 0
+    towerMaxHealt: 0
+    towerShield: 0
+    towerMaxShield: 0
+    towerDamage: 0
+    towerMaxDamage: 0
+    towerLevel: 0
+    towerAttackSpeed: 0
+    towerMaxAttackSpeed: 0
+    towerRange: 0
+    towerCost: 0
+  - towerName: 
+    towerSprite: {fileID: 0}
+    towerHealt: 0
+    towerMaxHealt: 0
+    towerShield: 0
+    towerMaxShield: 0
+    towerDamage: 0
+    towerMaxDamage: 0
+    towerLevel: 0
+    towerAttackSpeed: 0
+    towerMaxAttackSpeed: 0
+    towerRange: 0
+    towerCost: 0
   iceTowerDatas:
-  - iceTowerName: IceTower_Asset 21
-    iceTowerSprite: {fileID: 21300000, guid: f71d2a122af26494d88ad38231c57978, type: 3}
-    iceTowerhealt: 50
-    iceTowerShield: 50
-    iceTowerDamage: 10
-    iceTowerLevel: 1
-    iceTowerAttackSpeed: 1
-    iceTowerRange: 5
-    iceTowerCost: 50
-  - iceTowerName: IceTower_Asset 24
-    iceTowerSprite: {fileID: 21300000, guid: 9cc4a20963e075b429d90855a47148f2, type: 3}
-    iceTowerhealt: 100
-    iceTowerShield: 100
-    iceTowerDamage: 20
-    iceTowerLevel: 2
-    iceTowerAttackSpeed: 2
-    iceTowerRange: 15
-    iceTowerCost: 100
-  - iceTowerName: IceTower_Asset 30
-    iceTowerSprite: {fileID: 21300000, guid: 77e2b8c40e848f047b1b726dff374253, type: 3}
-    iceTowerhealt: 150
-    iceTowerShield: 150
-    iceTowerDamage: 30
-    iceTowerLevel: 3
-    iceTowerAttackSpeed: 3
-    iceTowerRange: 25
-    iceTowerCost: 150
-  - iceTowerName: IceTower_Asset 27
-    iceTowerSprite: {fileID: 21300000, guid: 908ec27f20a7ddd498e46e019653456f, type: 3}
-    iceTowerhealt: 200
-    iceTowerShield: 200
-    iceTowerDamage: 40
-    iceTowerLevel: 4
-    iceTowerAttackSpeed: 4
-    iceTowerRange: 35
-    iceTowerCost: 200
+  - towerName: 
+    towerSprite: {fileID: 0}
+    towerHealt: 0
+    towerMaxHealt: 0
+    towerShield: 0
+    towerMaxShield: 0
+    towerDamage: 0
+    towerMaxDamage: 0
+    towerLevel: 0
+    towerAttackSpeed: 0
+    towerMaxAttackSpeed: 0
+    towerRange: 0
+    towerCost: 0
+  - towerName: 
+    towerSprite: {fileID: 0}
+    towerHealt: 0
+    towerMaxHealt: 0
+    towerShield: 0
+    towerMaxShield: 0
+    towerDamage: 0
+    towerMaxDamage: 0
+    towerLevel: 0
+    towerAttackSpeed: 0
+    towerMaxAttackSpeed: 0
+    towerRange: 0
+    towerCost: 0
+  - towerName: 
+    towerSprite: {fileID: 0}
+    towerHealt: 0
+    towerMaxHealt: 0
+    towerShield: 0
+    towerMaxShield: 0
+    towerDamage: 0
+    towerMaxDamage: 0
+    towerLevel: 0
+    towerAttackSpeed: 0
+    towerMaxAttackSpeed: 0
+    towerRange: 0
+    towerCost: 0
+  - towerName: 
+    towerSprite: {fileID: 0}
+    towerHealt: 0
+    towerMaxHealt: 0
+    towerShield: 0
+    towerMaxShield: 0
+    towerDamage: 0
+    towerMaxDamage: 0
+    towerLevel: 0
+    towerAttackSpeed: 0
+    towerMaxAttackSpeed: 0
+    towerRange: 0
+    towerCost: 0

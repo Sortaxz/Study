@@ -17,14 +17,14 @@ public class BalanceOperationsUIControl
 
     public void SetCoinIncraseText(int value)
     {
-        int coin = balanceOperations.CoinValueIncrease(value);
+        float coin = balanceOperations.CoinValueIncrease(value);
         balanceTextMeshProGUI.text = coin.ToString();
         
     }
 
-    public void SetCoinValueReductionText(int value)
+    public void SetCoinValueReductionText(float value)
     {
-        int coin = balanceOperations.CoinValueReduction(value);
+        float coin = balanceOperations.CoinValueReduction(value);
         balanceTextMeshProGUI.text = coin.ToString();
     }
 }
